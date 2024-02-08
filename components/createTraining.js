@@ -1,31 +1,35 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
+import ChooseExercise from './ChooseExercice';
+import AddStandardExercise from './ExerciseStandard';
+import AddCardioExercise from './ExerciseCardio';
 
 export default function CreateTraining() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
-    const [exercises, setExercises] = useState(['']);
+    const [exercises, setExercises] = useState([]);
+    const [selectedExerciseType, setSelectedExerciseType] = useState('standard');
 
     const handleCreateTraining = () => {
         // Votre logique de création d'entraînement ici
     };
 
-    const handleAddExercise = () => {
-        setExercises([...exercises, '']);
+    const handleSelectExerciseType = (type) => {
+        setSelectedExerciseType(type);
     };
 
-    const handleExerciseChange = (text, index) => {
-        const newExercises = [...exercises];
-        newExercises[index] = text;
-        setExercises(newExercises);
+    const handleAddStandardExercise = (exerciseName) => {
+        setExercises([...exercises, { type: 'standard', name: exerciseName }]);
+    };
+
+    const handleAddCardioExercise = (exerciseName, duration) => {
+        setExercises([...exercises, { type: 'cardio', name: exerciseName, duration: duration }]);
     };
 
     const handleRemoveExercise = (index) => {
-        const newExercises = [...exercises];
-        newExercises.splice(index, 1);
-        setExercises(newExercises);
+        setExercises(exercises.filter((_, exerciseIndex) => exerciseIndex !== index));
     };
 
     return (
@@ -35,18 +39,22 @@ export default function CreateTraining() {
             <TextInput placeholder="Description" value={description} onChangeText={setDescription} />
             <TextInput placeholder="Date" value={date} onChangeText={setDate} />
             <TextInput placeholder="Heure" value={time} onChangeText={setTime} />
-            <Text>Ajouter Exercices</Text>
+
+            <ChooseExercise onSelectExerciseType={handleSelectExerciseType} />
+            {selectedExerciseType === 'standard' ? (
+                <AddStandardExercise onAddStandardExercise={handleAddStandardExercise} />
+            ) : (
+                <AddCardioExercise onAddCardioExercise={handleAddCardioExercise} />
+            )}
+            <Text>Nombre d'exercices: {exercises.length}</Text>
             {exercises.map((exercise, index) => (
                 <View key={index}>
-                    <TextInput
-                        placeholder="Nom de l'exercice"
-                        value={exercise}
-                        onChangeText={(text) => handleExerciseChange(text, index)}
-                    />
+                    <Text>Type: {exercise.type}</Text>
+                    <Text>Nom: {exercise.name}</Text>
+                    {exercise.type === 'cardio' && <Text>Durée: {exercise.duration} minutes</Text>}
                     <Button title="-" onPress={() => handleRemoveExercise(index)} />
                 </View>
             ))}
-            <Button title="Ajouter" onPress={handleAddExercise} />
             <Button title="Créer" onPress={handleCreateTraining} />
         </View>
     );

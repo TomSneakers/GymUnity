@@ -12,6 +12,12 @@ export default function CreateTraining() {
 
     const handleCreateTraining = () => {
         // Votre logique de création d'entraînement ici
+        const object = {
+            title,
+            description,
+            exercises
+        }
+        console.log(object);
     };
 
     const handleSelectExerciseType = (type) => {

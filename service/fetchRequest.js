@@ -41,4 +41,8 @@ export class FetchRequest {
     static post(ressource) {
         return new FetchRequest('POST', ressource);
     }
+
+    static get(ressource) {
+        return new FetchRequest('GET', ressource);
+    }
 }

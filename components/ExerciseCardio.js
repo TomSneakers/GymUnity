@@ -4,7 +4,7 @@ import { View, TextInput, Button } from 'react-native';
 
 function AddCardioExercise({ onAddCardioExercise }) {
     const [exerciseName, setExerciseName] = useState('');
-    const [duration, setDuration] = useState('');
+    // const [duration, setDuration] = useState('');
 
     const handleAddCardioExercise = () => {
         onAddCardioExercise(exerciseName, duration);
@@ -19,12 +19,12 @@ function AddCardioExercise({ onAddCardioExercise }) {
                 value={exerciseName}
                 onChangeText={setExerciseName}
             />
-            <TextInput
+            {/* <TextInput
                 placeholder="Durée (en minutes)"
                 value={duration}
                 onChangeText={setDuration}
                 keyboardType="numeric"
-            />
+            /> */}
             <Button title="Ajouter" onPress={handleAddCardioExercise} />
         </View>
     );

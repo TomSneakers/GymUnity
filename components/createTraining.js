@@ -7,8 +7,6 @@ import AddCardioExercise from './ExerciseCardio';
 export default function CreateTraining() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [date, setDate] = useState('');
-    const [time, setTime] = useState('');
     const [exercises, setExercises] = useState([]);
     const [selectedExerciseType, setSelectedExerciseType] = useState('standard');
 
@@ -37,8 +35,8 @@ export default function CreateTraining() {
             <Text>Création d'entraînement</Text>
             <TextInput placeholder="Titre" value={title} onChangeText={setTitle} />
             <TextInput placeholder="Description" value={description} onChangeText={setDescription} />
-            <TextInput placeholder="Date" value={date} onChangeText={setDate} />
-            <TextInput placeholder="Heure" value={time} onChangeText={setTime} />
+            {/* <TextInput placeholder="Date" value={date} onChangeText={setDate} />
+            <TextInput placeholder="Heure" value={time} onChangeText={setTime} /> */}
 
             <ChooseExercise onSelectExerciseType={handleSelectExerciseType} />
             {selectedExerciseType === 'standard' ? (

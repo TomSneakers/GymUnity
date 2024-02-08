@@ -1,28 +1,35 @@
-// Entrainement.js
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, Text, Button } from 'react-native';
 
-const Entrainement = () => {
+export default function Entrainement({ navigation }) {
+    const [trainings, setTrainings] = useState([]);
+    // const API_URL = 'http://localhost:3000';
+    // useEffect(() => {
+    //     fetch(`${API_URL}/training`)
+    //         .then(response => response.json())
+    //         .then(data => setTrainings(data))
+    //         .catch(error => console.error('Erreur:', error));
+    // }, []);
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.heading}>Entrainement</Text>
-            {/* Ajoute d'autres éléments de la page de profil ici */}
+        <View>
+            <Text>Entrainements</Text>
+            <FlatList
+                data={trainings}
+                keyExtractor={item => item.id.toString()}
+                renderItem={({ item }) => (
+                    <View>
+                        <Text>{item.title}</Text>
+                        <Text>{item.description}</Text>
+                        <Text>{item.date}</Text>
+                        <Text>{item.time}</Text>
+                    </View>
+                )}
+            />
+            <Button
+                title="Creer un entrainement"
+                onPress={() => navigation.navigate('MainTabs', { screen: 'CreateTraining' })}
+            />
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-    },
-    heading: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 20,
-    },
-
-});
-export default Entrainement;

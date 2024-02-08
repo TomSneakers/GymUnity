@@ -6,6 +6,7 @@ import Communication from '../screens/Communication';
 import Entrainement from '../screens/Entrainement';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import CreateTraining from './createTraining';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,6 +16,7 @@ const MainTabs = () => {
             <Tab.Screen name="Profile" component={ProfilePage} />
             <Tab.Screen name="Groupe" component={Communication} />
             <Tab.Screen name="Entrainement" component={Entrainement} />
+            <Tab.Screen name="CreateTraining" component={CreateTraining} />
         </Tab.Navigator>
     );
 };

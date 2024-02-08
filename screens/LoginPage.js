@@ -1,16 +1,16 @@
 // LoginPage.js
-import React, {useState} from 'react';
-import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert} from 'react-native';
-import signIn, {authService} from '../service/authService';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import signIn, { authService } from '../service/authService';
 
-const LoginPage = ({navigation}) => {
+const LoginPage = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     function handleSubmit() {
         authService.signIn(email, password)
-                   .then(() => navigation.navigate('Entrainement'))
-                   .catch(() => Alert.alert('Erreur', 'Email ou mot de passe incorrect'));
+            .then(() => navigation.navigate('MainTabs'))
+            .catch((e) => Alert.alert('Erreur', JSON.stringify(e)));
     }
 
     return (

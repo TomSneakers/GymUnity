@@ -1,46 +1,32 @@
 // LoginPage.js
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import signIn, {authService} from '../service/authService';
 
-const LoginPage = ({ navigation }) => {
-    const [username, setUsername] = useState('');
+const LoginPage = ({navigation}) => {
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleUsernameChange = (text) => {
-        setUsername(text);
-    };
-
-    const handlePasswordChange = (text) => {
-        setPassword(text);
-    };
-
-    // LoginPage.js
-    const handleSubmit = () => {
-        // Vérifie si l'identifiant et le mot de passe sont "test"
-        if (username === 'Test' && password === 'test') {
-            // Redirige vers le navigateur supérieur (MainTabs)
-            navigation.navigate('MainTabs');
-        } else {
-            // Affiche une alerte si les informations sont incorrectes
-            Alert.alert('Erreur', 'Identifiant ou mot de passe incorrect.');
-        }
-    };
-
+    function handleSubmit() {
+        authService.signIn(email, password)
+                   .then(() => navigation.navigate('Entrainement'))
+                   .catch(() => Alert.alert('Erreur', 'Email ou mot de passe incorrect'));
+    }
 
     return (
         <View style={styles.container}>
             <Text style={styles.heading}>Connexion</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Identifiant"
-                onChangeText={handleUsernameChange}
-                value={username}
+                placeholder="Email"
+                onChangeText={setEmail}
+                value={email}
             />
             <TextInput
                 style={styles.input}
                 placeholder="Mot de passe"
                 secureTextEntry={true}
-                onChangeText={handlePasswordChange}
+                onChangeText={setPassword}
                 value={password}
             />
             <TouchableOpacity style={styles.button} onPress={handleSubmit}>

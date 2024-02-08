@@ -7,10 +7,11 @@ import MainTabs from './components/MainTabs';
 
 const Stack = createStackNavigator();
 
+
 const App = () => {
   return (
     <NavigationContainer >
-      <Stack.Navigator initialRouteName="AuthStack" headerMode="none">
+      <Stack.Navigator initialRouteName="AuthStack" option={{ headerShown: false }}>
         <Stack.Screen name="AuthStack" component={AuthStack} />
         <Stack.Screen name="MainTabs" component={MainTabs} />
       </Stack.Navigator>

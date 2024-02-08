@@ -9,11 +9,11 @@ const Stack = createStackNavigator();
 
 const AuthStack = () => {
     return (
-        <Stack.Navigator initialRouteName="LoginPage" headerMode="none">
-            <Stack.Screen name="LoginPage" component={LoginPage} />
-            <Stack.Screen name="SignupPage" component={SignupPage} />
-            <Stack.Screen name="ForgotPasswordPage" component={ForgotPasswordPage} />
-        </Stack.Navigator>
+        <Stack.Navigator initialRouteName="LoginPage" >
+            <Stack.Screen name="LoginPage" component={LoginPage} option={{ headerShown: false }} />
+            <Stack.Screen name="SignupPage" component={SignupPage} option={{ headerShown: false }} />
+            <Stack.Screen name="ForgotPasswordPage" component={ForgotPasswordPage} option={{ headerShown: false }} />
+        </Stack.Navigator >
     );
 };
 

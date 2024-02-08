@@ -1,20 +1,32 @@
 // SignupPage.js
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {authService} from '../service/authService';
+import {View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 
 
-const SignupPage = ({ navigation }) => {
+const SignupPage = ({navigation}) => {
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    function handleSubmit() {
+        authService.signUp(email, username, password)
+                   .then(() => navigation.navigate('LoginPage'));
+    }
+
     const goLogin = () => {
         navigation.navigate('LoginPage');
     };
+
     return (
         <View style={styles.container}>
             <Text style={styles.heading}>Inscription</Text>
-            <TextInput style={styles.input} placeholder="Mail" />
-            <TextInput style={styles.input} placeholder="Utilisateur" />
-            <TextInput style={styles.input} placeholder="Mot de passe" secureTextEntry={true} />
-            <TextInput style={styles.input} placeholder="Confirmation de mot de passe" secureTextEntry={true} />
-            <TouchableOpacity style={styles.button}>
+            <TextInput style={styles.input} placeholder="Email" onChangeText={setEmail}/>
+            <TextInput style={styles.input} placeholder="Utilisateur" onChangeText={setUsername}/>
+            <TextInput style={styles.input} placeholder="Mot de passe" secureTextEntry={true}
+                       onChangeText={setPassword}/>
+            <TextInput style={styles.input} placeholder="Confirmation de mot de passe" secureTextEntry={true}/>
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                 <Text style={styles.buttonText}>Inscription</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.loginLink} onPress={goLogin}>

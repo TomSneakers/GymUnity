@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 
 const MainTabs = () => {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator screenOptions={{ headerShown: false }}>
             <Tab.Screen name="Profile" component={ProfilePage} />
             <Tab.Screen name="Groupe" component={Communication} />
             <Tab.Screen name="Entrainement" component={Entrainement} />

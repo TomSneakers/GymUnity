@@ -1,9 +1,9 @@
-import {getItem} from "expo-secure-store";
+import { getItem } from "expo-secure-store";
 
 export class FetchRequest {
     constructor(method, ressource) {
         this.method = method;
-        this.url = `http://localhost:5149/${ressource}`;
+        this.url = `http://localhost:5149${ressource}`;
         this.headers = {};
         this.isUsingAuthorization = false;
     }
@@ -40,5 +40,9 @@ export class FetchRequest {
 
     static post(ressource) {
         return new FetchRequest('POST', ressource);
+    }
+
+    static get(ressource) {
+        return new FetchRequest('GET', ressource);
     }
 }

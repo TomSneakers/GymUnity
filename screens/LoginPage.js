@@ -1,71 +1,134 @@
 // LoginPage.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Button } from 'react-native';
 import signIn, { authService } from '../service/authService';
+import Bouton from '../components/Bouton';
+import { useFonts } from 'expo-font';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+
+
 
 const LoginPage = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setIsPasswordVisible(!isPasswordVisible);
+    };
+    const [fontsLoaded, fontError] = useFonts({
+        'Inter-Black': require('../assets/fonts/Inter-black.ttf'),
+    });
+    if (!fontsLoaded && !fontError) {
+        return null;
+    }
+
 
     function handleSubmit() {
         authService.signIn(email, password)
             .then(() => navigation.navigate('MainTabs'))
             .catch((e) => Alert.alert('Erreur', JSON.stringify(e)));
+
     }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.heading}>Connexion</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Email"
-                onChangeText={setEmail}
-                value={email}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Mot de passe"
-                secureTextEntry={true}
-                onChangeText={setPassword}
-                value={password}
-            />
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Connexion</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.forgotPassword} onPress={() => navigation.navigate('ForgotPasswordPage')}>
-                <Text style={styles.forgotPasswordText}>Mot de passe oublié ?</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.signupLink} onPress={() => navigation.navigate('SignupPage')}>
-                <Text style={styles.signupLinkText}>Inscription</Text>
-            </TouchableOpacity>
+            <View style={styles.inputContainer}>
+                <Text style={styles.text}>Connexion</Text>
+
+                <Text style={styles.label}>Email</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="xxxxx@xxxxx.com"
+                    placeholderTextColor="#969AA8"
+                    onChangeText={setEmail}
+                    value={email}
+                />
+
+                <View style={styles.inputRow}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="********"
+                        placeholderTextColor="#969AA8"
+                        secureTextEntry={!isPasswordVisible}
+                        onChangeText={setPassword}
+                    />
+                    <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyes}>
+                        <Icon name={isPasswordVisible ? "eye-off" : "eye"} size={24} color="orange" />
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.buttonContainer}>
+                <Bouton title="Se connecter" onPress={handleSubmit} style={styles.bouton} />
+                <TouchableOpacity style={styles.forgotPassword} onPress={() => navigation.navigate('ForgotPasswordPage')}>
+                    <Text style={styles.forgotPasswordText}>Mot de passe oublié ?</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.signupLink} onPress={() => navigation.navigate('SignupPage')}>
+                    <Text style={styles.signupLinkText}>Vous n’avez pas de compte ?</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
     },
-    heading: {
+
+    text: {
         fontSize: 24,
-        fontWeight: 'bold',
+        color: '#022150',
         marginBottom: 20,
+        fontFamily: 'Inter-Black',
+    },
+    inputRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 40,
+    },
+    eyes: {
+        position: 'absolute',
+        right: 10,
+        top: 10,
+    },
+    label: {
+        color: 'black',
+        fontFamily: 'Inter-Black',
     },
     input: {
         height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
+        borderColor: '#A7A7A7',
+        borderBottomWidth: 1,
         padding: 10,
         width: '100%',
+        color: '#022150',
+        fontWeight: 'bold',
+        marginBottom: 40,
+
     },
-    button: {
-        backgroundColor: 'blue',
-        padding: 10,
-        borderRadius: 5,
+    inputContainer: {
+        flex: 1,
+        width: '100%',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-end',
+        marginTop: 300,
+    },
+    buttonContainer: {
+        flex: 1,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        marginBottom: 36,
+
+    },
+    bouton: {
         width: '100%',
         alignItems: 'center',
     },
@@ -77,14 +140,17 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     forgotPasswordText: {
-        color: 'blue',
+        color: '#004080',
+        fontWeight: 'light',
+        fontFamily: 'Inter-Black',
     },
     signupLink: {
         marginTop: 20,
     },
     signupLinkText: {
-        color: 'blue',
+        color: '#004080',
         fontWeight: 'bold',
+
     },
 });
 

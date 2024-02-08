@@ -7,6 +7,14 @@ function getTrainings() {
                        .then(response => response.json());
 }
 
+function createTraining(training) {
+    return FetchRequest.post('/training')
+                       .withAuthorization()
+                       .withBody(training)
+                       .send();
+}
+
 export const trainingService = {
-    getTrainings
+    getTrainings,
+    createTraining
 };

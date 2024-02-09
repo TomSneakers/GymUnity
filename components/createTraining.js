@@ -13,7 +13,7 @@ export default function CreateTraining() {
             if (index === edited.index) {
                 return edited;
             }
-            return  exercise;
+            return exercise;
         });
         setExercises(newExercises);
     }
@@ -26,8 +26,8 @@ export default function CreateTraining() {
         setExercises(exercises.filter((_, exerciseIndex) => exerciseIndex !== index));
     };
     const handleCreateTraining = () => {
-        trainingService.createTraining({ title, description, exercises })
-            .catch((e) => Alert.alert('Erreur', "Erreur lors de la création de l'entraînement"));
+        trainingService.createTraining({title, description, exercises})
+                       .catch((e) => Alert.alert('Erreur', "Erreur lors de la création de l'entraînement"));
     };
 
     return (

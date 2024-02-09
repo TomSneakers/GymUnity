@@ -31,6 +31,7 @@ export default function CreateTraining() {
     const handleRemoveExercise = (index) => {
         setExercises(exercises.filter((_, exerciseIndex) => exerciseIndex !== index));
     };
+    
 
     return (
         <View>

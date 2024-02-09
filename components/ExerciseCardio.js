@@ -7,9 +7,9 @@ function AddCardioExercise({ onAddCardioExercise }) {
     // const [duration, setDuration] = useState('');
 
     const handleAddCardioExercise = () => {
-        onAddCardioExercise(exerciseName, duration);
+        onAddCardioExercise(exerciseName);
         setExerciseName('');
-        setDuration('');
+
     };
 
     return (

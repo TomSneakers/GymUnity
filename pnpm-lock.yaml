@@ -1,21 +1,28 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
-  '@react-native-async-storage/root':
-    specifier: github:react-native-async-storage/async-storage
-    version: github.com/react-native-async-storage/async-storage/990b6f2417359dd5dbf074b218719ccb79312e2b
+  '@react-native-picker/picker':
+    specifier: 2.6.1
+    version: 2.6.1(react-native@0.73.2)(react@18.2.0)
   '@react-navigation/bottom-tabs':
-    specifier: ^6.5.11
+    specifier: ^6.5.12
     version: 6.5.12(@react-navigation/native@6.1.10)(react-native-safe-area-context@4.9.0)(react-native-screens@3.29.0)(react-native@0.73.2)(react@18.2.0)
   '@react-navigation/native':
-    specifier: ^6.1.9
+    specifier: ^6.1.10
     version: 6.1.10(react-native@0.73.2)(react@18.2.0)
   '@react-navigation/stack':
-    specifier: ^6.3.20
+    specifier: ^6.3.21
     version: 6.3.21(@react-navigation/native@6.1.10)(react-native-gesture-handler@2.15.0)(react-native-safe-area-context@4.9.0)(react-native-screens@3.29.0)(react-native@0.73.2)(react@18.2.0)
   expo:
-    specifier: ~50.0.4
+    specifier: ^50.0.6
     version: 50.0.6(@babel/core@7.23.9)(@react-native/babel-preset@0.73.21)
+  expo-secure-store:
+    specifier: ~12.8.1
+    version: 12.8.1(expo@50.0.6)
   expo-status-bar:
     specifier: ~1.11.1
     version: 1.11.1
@@ -34,10 +41,10 @@ dependencies:
 
 devDependencies:
   '@babel/core':
-    specifier: ^7.20.0
+    specifier: ^7.23.9
     version: 7.23.9
   tailwindcss:
-    specifier: ^3.3.2
+    specifier: ^3.4.1
     version: 3.4.1
 
 packages:
@@ -1957,7 +1964,7 @@ packages:
     dependencies:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       jest-mock: 29.7.0
     dev: false
 
@@ -1967,7 +1974,7 @@ packages:
     dependencies:
       '@jest/types': 29.6.3
       '@sinonjs/fake-timers': 10.3.0
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       jest-message-util: 29.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
@@ -1986,7 +1993,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       '@types/yargs': 15.0.19
       chalk: 4.1.2
     dev: false
@@ -1998,7 +2005,7 @@ packages:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       '@types/yargs': 17.0.32
       chalk: 4.1.2
     dev: false
@@ -2242,6 +2249,16 @@ packages:
       - encoding
       - supports-color
       - utf-8-validate
+    dev: false
+
+  /@react-native-picker/picker@2.6.1(react-native@0.73.2)(react@18.2.0):
+    resolution: {integrity: sha512-oJftvmLOj6Y6/bF4kPcK6L83yNBALGmqNYugf94BzP0FQGpHBwimVN2ygqkQ2Sn2ZU3pGUZMs0jV6+Gku2GyYg==}
+    peerDependencies:
+      react: '>=16'
+      react-native: '>=0.57'
+    dependencies:
+      react: 18.2.0
+      react-native: 0.73.2(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
     dev: false
 
   /@react-native/assets-registry@0.73.1:
@@ -2648,8 +2665,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.3
     dev: false
 
-  /@types/node@20.11.16:
-    resolution: {integrity: sha512-gKb0enTmRCzXSSUJDq6/sPcqrfCv2mkkG6Jt/clpn5eiCbKTY+SgZUxo+p8ZKMof5dCp9vHQUAB7wOUTod22wQ==}
+  /@types/node@20.11.17:
+    resolution: {integrity: sha512-QmgQZGWu1Yw9TDyAP9ZzpFJKynYNeOvwMJmaxABfieQoVoiVOS6MN1WSpqpRcbeA5+RW82kraAVxCCJg+780Qw==}
     dependencies:
       undici-types: 5.26.5
     dev: false
@@ -3051,7 +3068,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001585
-      electron-to-chromium: 1.4.661
+      electron-to-chromium: 1.4.664
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.22.3)
 
@@ -3206,7 +3223,7 @@ packages:
     engines: {node: '>=12.13.0'}
     hasBin: true
     dependencies:
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       escape-string-regexp: 4.0.0
       is-wsl: 2.2.0
       lighthouse-logger: 1.4.2
@@ -3217,7 +3234,7 @@ packages:
   /chromium-edge-launcher@1.0.0:
     resolution: {integrity: sha512-pgtgjNKZ7i5U++1g1PWv75umkHvhVTDOQIZ+sjeUX9483S7Y6MUvO0lrd7ShGlQlFHMN4SwKTCq/X8hWrbv2KA==}
     dependencies:
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       escape-string-regexp: 4.0.0
       is-wsl: 2.2.0
       lighthouse-logger: 1.4.2
@@ -3651,8 +3668,8 @@ packages:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
     dev: false
 
-  /electron-to-chromium@1.4.661:
-    resolution: {integrity: sha512-AFg4wDHSOk5F+zA8aR+SVIOabu7m0e7BiJnigCvPXzIGy731XENw/lmNxTySpVFtkFEy+eyt4oHhh5FF3NjQNw==}
+  /electron-to-chromium@1.4.664:
+    resolution: {integrity: sha512-k9VKKSkOSNPvSckZgDDl/IQx45E1quMjX8QfLzUsAs/zve8AyFDK+ByRynSP/OfEfryiKHpQeMf00z0leLCc3A==}
 
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -3849,6 +3866,14 @@ packages:
     resolution: {integrity: sha512-rlctE3nCNLCGv3LosGQNaTuwGrr2SyQA+hOgci/0l+VRc0gFNtvl0gskph9C0tnN1jzBeb8rRZQYVj5ih1yxcA==}
     dependencies:
       invariant: 2.2.4
+    dev: false
+
+  /expo-secure-store@12.8.1(expo@50.0.6):
+    resolution: {integrity: sha512-Ju3jmkHby4w7rIzdYAt9kQyQ7HhHJ0qRaiQOInknhOLIltftHjEgF4I1UmzKc7P5RCfGNmVbEH729Pncp/sHXQ==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      expo: 50.0.6(@babel/core@7.23.9)(@react-native/babel-preset@0.73.21)
     dev: false
 
   /expo-status-bar@1.11.1:
@@ -4548,7 +4573,7 @@ packages:
       '@jest/environment': 29.7.0
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       jest-mock: 29.7.0
       jest-util: 29.7.0
     dev: false
@@ -4578,7 +4603,7 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       jest-util: 29.7.0
     dev: false
 
@@ -4587,7 +4612,7 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -4610,7 +4635,7 @@ packages:
     resolution: {integrity: sha512-eIz2msL/EzL9UFTFFx7jBTkeZfku0yUAyZZZmJ93H2TYEiroIx2PQjEXcwYtYl8zXCxb+PAmA2hLIt/6ZEkPHw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -7349,13 +7374,3 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: false
-
-  github.com/react-native-async-storage/async-storage/990b6f2417359dd5dbf074b218719ccb79312e2b:
-    resolution: {tarball: https://codeload.github.com/react-native-async-storage/async-storage/tar.gz/990b6f2417359dd5dbf074b218719ccb79312e2b}
-    name: '@react-native-async-storage/root'
-    version: 0.0.0
-    dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

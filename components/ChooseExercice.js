@@ -15,8 +15,8 @@ function ChooseExercise({ onSelectExerciseType }) {
         <View>
             <Text>Choisir le type d'exercice :</Text>
             <Picker selectedValue={exerciseType} onValueChange={handleSelectExerciseType}>
-                <Picker.Item label="Exercice Standard" value="standard" />
-                <Picker.Item label="Exercice Cardio" value="cardio" />
+                <Picker.Item label="Exercice Standard" value="Strenght" />
+                <Picker.Item label="Exercice Cardio" value="Cardio" />
             </Picker>
         </View>
     );

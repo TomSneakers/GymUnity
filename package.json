@@ -11,9 +11,9 @@
   "dependencies": {
     "@expo-google-fonts/oswald": "^0.2.3",
     "@react-native-picker/picker": "2.6.1",
-    "@react-navigation/bottom-tabs": "^6.5.11",
-    "@react-navigation/native": "^6.1.9",
-    "@react-navigation/stack": "^6.3.20",
+    "@react-navigation/bottom-tabs": "^6.5.12",
+    "@react-navigation/native": "^6.1.10",
+    "@react-navigation/stack": "^6.3.21",
     "expo": "^50.0.6",
     "expo-font": "~11.10.2",
     "expo-secure-store": "~12.8.1",
@@ -21,13 +21,12 @@
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-native": "0.73.2",
-    "react-native-async-storage": "^0.0.1",
     "react-native-tailwindcss": "^1.1.11",
     "react-native-vector-icons": "^10.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "tailwindcss": "^3.3.2"
+    "@babel/core": "^7.23.9",
+    "tailwindcss": "^3.4.1"
   },
   "private": true
 }

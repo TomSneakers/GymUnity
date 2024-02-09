@@ -1,9 +1,9 @@
-import {getItem} from "expo-secure-store";
+import { getItem } from "expo-secure-store";
 
 export class FetchRequest {
     constructor(method, ressource) {
         this.method = method;
-        this.url = `http://localhost:5149/${ressource}`;
+        this.url = `http://localhost:5149${ressource}`;
         this.headers = {};
         this.isUsingAuthorization = false;
     }
@@ -31,6 +31,7 @@ export class FetchRequest {
             const token = getItem('accessToken');
             this.addHeader('Authorization', `Bearer ${token}`);
         }
+
         return fetch(this.url, {
             method: this.method,
             headers: this.headers,

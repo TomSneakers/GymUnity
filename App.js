@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer >
-      <Stack.Navigator initialRouteName="Entrainement" option={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="AuthStack" option={{ headerShown: false }}>
         <Stack.Screen name="AuthStack" component={AuthStack} />
         <Stack.Screen name="MainTabs" component={MainTabs} />
         <Stack.Screen name="Entrainement" component={Entrainement} />

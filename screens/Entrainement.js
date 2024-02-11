@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Text, Button, Alert } from 'react-native';
+import { View, FlatList, Text, Button, Alert, StyleSheet } from 'react-native';
 import { trainingService } from "../service/trainingService";
 
 export default function Entrainement({ navigation }) {
@@ -14,23 +14,53 @@ export default function Entrainement({ navigation }) {
     }, []);
 
     return (
-        <View>
-            <Text>Entrainements</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>Entrainements</Text>
             <FlatList
                 data={trainings}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => (
-                    <View>
-                        <Text>{item.title}</Text>
-                        <Text>{item.description}</Text>
-                        <Text>{item.exerciseCount}</Text>
+                    <View style={styles.itemContainer}>
+                        <Text style={styles.itemTitle}>{item.title}</Text>
+                        <Text style={styles.itemDescription}>{item.description}</Text>
+                        <Text style={styles.itemCount}>{item.exerciseCount}</Text>
                     </View>
                 )}
-            />
-            <Button
-                title="Creer un entrainement"
-                onPress={() => navigation.navigate('MainTabs', { screen: 'CreateTraining' })}
             />
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 10,
+        backgroundColor: '#f5f5f5',
+        top: 80,
+        marginBottom: 180,
+
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    itemContainer: {
+        backgroundColor: '#fff',
+        padding: 10,
+        marginBottom: 10,
+        borderRadius: 5,
+    },
+    itemTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    itemDescription: {
+        fontSize: 14,
+        color: '#666',
+    },
+    itemCount: {
+        fontSize: 12,
+        color: '#999',
+    },
+});

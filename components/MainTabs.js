@@ -1,6 +1,6 @@
 // MainTabs.js
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome6, Entypo } from '@expo/vector-icons';
 
 import ProfilePage from '../screens/ProfilePage';
 import Communication from '../screens/Communication';
@@ -37,19 +37,19 @@ const MainTabs = () => {
             <Tab.Screen name="Profile" component={ProfilePage} options={{
                 tabBarLabel: '',
                 tabBarIcon: ({ color }) => (
-                    <Ionicons name="add-circle" color={color} size={40} />
+                    <Entypo name="home" color={color} size={40} />
                 ),
             }} />
             <Tab.Screen name="Groupe" component={Communication} options={{
                 tabBarLabel: '',
                 tabBarIcon: ({ color }) => (
-                    <Ionicons name="add-circle" color={color} size={40} />
+                    <Entypo name="chat" color={color} size={38} />
                 ),
             }} />
             <Tab.Screen name="Entrainement" component={Entrainement} options={{
                 tabBarLabel: '',
                 tabBarIcon: ({ color }) => (
-                    <Ionicons name="add-circle" color={color} size={40} />
+                    <FontAwesome6 name="dumbbell" color={color} size={35} />
                 ),
             }} />
             <Tab.Screen

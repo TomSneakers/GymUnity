@@ -134,7 +134,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     buttonText: {
-        color: 'white',
         fontWeight: 'light',
         color: '#004080',
     },

@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import Bouton from '../components/Bouton';
 
 
-const EnterPage = () => {
+const WelcomePage = () => {
     const navigation = useNavigation();
 
     return (
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default EnterPage;
+export default WelcomePage;

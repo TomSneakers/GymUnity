@@ -1,22 +1,23 @@
 // MainTabs.js
 import React from "react";
-import {Ionicons, FontAwesome6, Entypo} from "@expo/vector-icons";
+import { Ionicons, FontAwesome6, Entypo } from "@expo/vector-icons";
 
 import ProfilePage from "../screens/ProfilePage";
 import Communication from "../screens/Communication";
 import Entrainement from "../screens/Entrainement";
 
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CreateTraining from "./createTraining";
-import {useMe} from "./UseMe";
+import { useMe } from "./UseMe";
+import { SafeAreaView, Text } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
 const MainTabs = () => {
-	const {loading} = useMe();
+	const { loading } = useMe();
 
 	if (loading)
-		return null;
+		return <SafeAreaView><Text>chef</Text></SafeAreaView>;
 
 	return (
 		<Tab.Navigator
@@ -42,29 +43,29 @@ const MainTabs = () => {
 		>
 			<Tab.Screen name="Profile" component={ProfilePage} options={{
 				tabBarLabel: "",
-				tabBarIcon: ({color}) => (
-					<Entypo name="home" color={color} size={40}/>
+				tabBarIcon: ({ color }) => (
+					<Entypo name="home" color={color} size={40} />
 				),
-			}}/>
+			}} />
 			<Tab.Screen name="Groupe" component={Communication} options={{
 				tabBarLabel: "",
-				tabBarIcon: ({color}) => (
-					<Entypo name="chat" color={color} size={38}/>
+				tabBarIcon: ({ color }) => (
+					<Entypo name="chat" color={color} size={38} />
 				),
-			}}/>
+			}} />
 			<Tab.Screen name="Entrainement" component={Entrainement} options={{
 				tabBarLabel: "",
-				tabBarIcon: ({color}) => (
-					<FontAwesome6 name="dumbbell" color={color} size={35}/>
+				tabBarIcon: ({ color }) => (
+					<FontAwesome6 name="dumbbell" color={color} size={35} />
 				),
-			}}/>
+			}} />
 			<Tab.Screen
 				name="CreateTraining"
 				component={CreateTraining}
 				options={{
 					tabBarLabel: "",
-					tabBarIcon: ({color}) => (
-						<Ionicons name="add-circle" color={color} size={40}/>
+					tabBarIcon: ({ color }) => (
+						<Ionicons name="add-circle" color={color} size={40} />
 					),
 				}}
 

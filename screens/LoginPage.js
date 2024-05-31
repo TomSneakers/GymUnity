@@ -71,6 +71,8 @@ const LoginPage = ({navigation}) => {
 	);
 };
 
+
+
 const styles = StyleSheet.create({
 									 container: {
 										 backgroundColor: "white",

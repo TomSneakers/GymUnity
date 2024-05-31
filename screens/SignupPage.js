@@ -40,9 +40,9 @@ const SignupPage = ({ navigation }) => {
             return;
         }
 
-        authService.signUp(email, password)
+        authService.signUp(email, username, password)
             .then(() => navigation.navigate('MainTabs'))
-            .catch((e) => Alert.alert('Erreur', JSON.stringify(e)));
+            .catch((e) => { Alert.alert('Erreur', Object.keys(e).map(key => e[key][0]).join("\n")) });
     }
 
 

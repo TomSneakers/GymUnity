@@ -1,5 +1,4 @@
-import {getItem} from "expo-secure-store";
-import {authService} from "./authService";
+import { getItem } from "expo-secure-store";
 
 export class FetchRequest {
 	constructor(method, ressource) {
@@ -29,12 +28,12 @@ export class FetchRequest {
 
 	async send() {
 		if (this.isUsingAuthorization) {
-			let token = JSON.parse(getItem("accessToken"));
-			if (new Date().getTime() - token.fetchDate < 3600) {
-				token = (await authService.refreshToken()).accessToken;
-			}
-			this.addHeader("Authorization", `Bearer ${token.accessToken}`);
+			const accessToken = getItem("accessToken");
+			console.log(accessToken);
+			this.addHeader("Authorization", `Bearer ${accessToken}`);
 		}
+
+		console.log(this);
 		return fetch(this.url, {
 			method: this.method,
 			headers: this.headers,

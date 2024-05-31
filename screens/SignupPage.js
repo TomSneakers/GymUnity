@@ -34,6 +34,16 @@ const SignupPage = ({ navigation }) => {
 
 
 
+    // function handleSubmit() {
+    //     if (password !== confirmPassword) {
+    //         Alert.alert('Erreur', 'Les mots de passe ne correspondent pas');
+    //         return;
+    //     }
+
+    //     authService.signUp(email, username, password)
+    //         .then(() => navigation.navigate('LoginPage'))
+    //         .catch((e) => { Alert.alert('Erreur', Object.keys(e).map(key => e[key][0]).join("\n")) });
+    // }
     function handleSubmit() {
         if (password !== confirmPassword) {
             Alert.alert('Erreur', 'Les mots de passe ne correspondent pas');
@@ -41,10 +51,20 @@ const SignupPage = ({ navigation }) => {
         }
 
         authService.signUp(email, username, password)
-            .then(() => navigation.navigate('MainTabs'))
+            .then((response) => {
+                if (response.status === 200) {
+                    navigation.navigate('LoginPage');
+                } else {
+                    console.log('Status de la réponse:', JSON.stringify(response.body));
+                    if (response.body.errors && response.body.errors.DuplicateUserName) {
+                        Alert.alert('Erreur', 'Votre adresse est déjà associée à un compte');
+                    } else {
+                        Alert.alert('Erreur', 'Une erreur est survenue lors de l\'inscription. Réponse du serveur : ' + JSON.stringify(response.body));
+                    }
+                }
+            })
             .catch((e) => { Alert.alert('Erreur', Object.keys(e).map(key => e[key][0]).join("\n")) });
     }
-
 
     const goLogin = () => {
         navigation.navigate('LoginPage');

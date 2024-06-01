@@ -53,7 +53,7 @@ const SignupPage = ({ navigation }) => {
         authService.signUp(email, username, password)
             .then((response) => {
                 if (response.status === 200) {
-                    navigation.navigate('LoginPage');
+                    navigation.navigate('AfterSignup');
                 } else {
                     console.log('Status de la réponse:', JSON.stringify(response.body));
                     if (response.body.errors && response.body.errors.DuplicateUserName) {

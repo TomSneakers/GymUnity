@@ -51,9 +51,9 @@ function signIn(email, password) {
 		})
 		.then(response => response.json())
 		.then(({ accessToken, refreshToken }) => {
-			//const _accessToken = { accessToken, fetchDate: new Date().getTime() };
-			SecureStore.setItem("accessToken", accessToken);
-			SecureStore.setItem("refreshToken", refreshToken);
+			// Assurez-vous que accessToken et refreshToken sont des chaînes de caractères
+			SecureStore.setItem("accessToken", String(accessToken));
+			SecureStore.setItem("refreshToken", String(refreshToken));
 		});
 }
 
@@ -80,7 +80,9 @@ function findMe() {
 			console.log(e);
 			throw e;
 		})
-		.then(response => response.json());
+		.then(
+			response => response.json());
+
 }
 
 export const authService = { signUp, signIn, findMe, refreshToken };

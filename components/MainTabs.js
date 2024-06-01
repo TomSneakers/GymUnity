@@ -17,7 +17,7 @@ const MainTabs = () => {
 	const { loading } = useMe();
 
 	if (loading)
-		return <SafeAreaView><Text>chef</Text></SafeAreaView>;
+		return <SafeAreaView><Text>Loading ...</Text></SafeAreaView>;
 
 	return (
 		<Tab.Navigator

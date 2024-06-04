@@ -5,7 +5,7 @@ import { authService } from "../service/authService";
 export function useMe() {
 	const navigation = useNavigation();
 	const [me, setMe] = useState({});
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	useEffect(() => {
 		authService.findMe()
 			.then(setMe)

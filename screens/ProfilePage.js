@@ -1,21 +1,33 @@
-// ProfilePage.js
-import React, { useMemo } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
 import { useMe } from "../components/UseMe";
+import * as SecureStore from "expo-secure-store";
+import { useNavigation } from "@react-navigation/native";
 
 const ProfilePage = ({ route }) => {
 	const { me, loading } = useMe();
+	const navigation = useNavigation();
 
-	if (loading)
-		return null;
+	if (loading) {
+		return <Text>Loading...</Text>;
+	}
+
+	if (!me) {
+		return <Text>Erreur lors du chargement des données utilisateur.</Text>;
+	}
 
 	return (
 		<View style={styles.container}>
 			<Text style={styles.heading}>Profile</Text>
-
-			<Text style={styles.description}>
-				hello {me.email}
-			</Text>
+			<Text style={styles.description}>Hello {me.email}</Text>
+			<Button
+				title="Se déconnecter"
+				onPress={() => {
+					SecureStore.deleteItemAsync("accessToken");
+					SecureStore.deleteItemAsync("refreshToken");
+					navigation.navigate("WelcomePage");
+				}}
+			/>
 		</View>
 	);
 };

@@ -1,13 +1,13 @@
 // LoginPage.js
-import React, {useState} from "react";
-import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Button} from "react-native";
-import signIn, {authService} from "../service/authService";
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Button } from "react-native";
+import signIn, { authService } from "../service/authService";
 import Bouton from "../components/Bouton";
-import {useFonts} from "expo-font";
+import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/Ionicons";
 
 
-const LoginPage = ({navigation}) => {
+const LoginPage = ({ navigation }) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -16,8 +16,8 @@ const LoginPage = ({navigation}) => {
 		setIsPasswordVisible(!isPasswordVisible);
 	};
 	const [fontsLoaded, fontError] = useFonts({
-												  "Inter-Black": require("../assets/fonts/Inter-black.ttf"),
-											  });
+		"Inter-Black": require("../assets/fonts/Inter-black.ttf"),
+	});
 	if (!fontsLoaded && !fontError) {
 		return null;
 	}
@@ -25,8 +25,8 @@ const LoginPage = ({navigation}) => {
 
 	function handleSubmit() {
 		authService.signIn(email, password)
-				   .then(() => navigation.navigate("MainTabs"))
-				   .catch((e) => console.log(e));
+			.then(() => navigation.navigate("MainTabs"))
+			.catch((e) => console.log(e));
 
 	}
 
@@ -53,14 +53,14 @@ const LoginPage = ({navigation}) => {
 						onChangeText={setPassword}
 					/>
 					<TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyes}>
-						<Icon name={isPasswordVisible ? "eye-off" : "eye"} size={24} color="orange"/>
+						<Icon name={isPasswordVisible ? "eye-off" : "eye"} size={24} color="orange" />
 					</TouchableOpacity>
 				</View>
 			</View>
 			<View style={styles.buttonContainer}>
-				<Bouton title="Se connecter" onPress={handleSubmit} style={styles.bouton}/>
+				<Bouton title="Se connecter" onPress={handleSubmit} style={styles.bouton} />
 				<TouchableOpacity style={styles.forgotPassword}
-								  onPress={() => navigation.navigate("ForgotPasswordPage")}>
+					onPress={() => navigation.navigate("ForgotPasswordPage")}>
 					<Text style={styles.forgotPasswordText}>Mot de passe oublié ?</Text>
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.signupLink} onPress={() => navigation.navigate("SignupPage")}>
@@ -74,85 +74,85 @@ const LoginPage = ({navigation}) => {
 
 
 const styles = StyleSheet.create({
-									 container: {
-										 backgroundColor: "white",
-										 flex: 1,
-										 justifyContent: "center",
-										 alignItems: "center",
-										 padding: 20,
-									 },
+	container: {
+		backgroundColor: "white",
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		padding: 20,
+	},
 
-									 text: {
-										 fontSize: 24,
-										 color: "#022150",
-										 marginBottom: 20,
-										 fontFamily: "Inter-Black",
-									 },
-									 inputRow: {
-										 flexDirection: "row",
-										 justifyContent: "space-between",
-										 alignItems: "center",
-										 marginBottom: 40,
-									 },
-									 eyes: {
-										 position: "absolute",
-										 right: 10,
-										 top: 10,
-									 },
-									 label: {
-										 color: "black",
-										 fontFamily: "Inter-Black",
-									 },
-									 input: {
-										 height: 40,
-										 borderColor: "#A7A7A7",
-										 borderBottomWidth: 1,
-										 padding: 10,
-										 width: "100%",
-										 color: "#022150",
-										 fontWeight: "bold",
-										 marginBottom: 40,
+	text: {
+		fontSize: 24,
+		color: "#022150",
+		marginBottom: 20,
+		fontFamily: "Inter-Black",
+	},
+	inputRow: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center",
+		marginBottom: 40,
+	},
+	eyes: {
+		position: "absolute",
+		right: 10,
+		top: 10,
+	},
+	label: {
+		color: "black",
+		fontFamily: "Inter-Black",
+	},
+	input: {
+		height: 40,
+		borderColor: "#A7A7A7",
+		borderBottomWidth: 1,
+		padding: 10,
+		width: "100%",
+		color: "#022150",
+		fontWeight: "bold",
+		marginBottom: 40,
 
-									 },
-									 inputContainer: {
-										 flex: 1,
-										 width: "100%",
-										 alignItems: "flex-start",
-										 justifyContent: "flex-end",
-										 marginTop: 300,
-									 },
-									 buttonContainer: {
-										 flex: 1,
-										 width: "100%",
-										 alignItems: "center",
-										 justifyContent: "flex-end",
-										 marginBottom: 36,
+	},
+	inputContainer: {
+		flex: 1,
+		width: "100%",
+		alignItems: "flex-start",
+		justifyContent: "flex-end",
+		marginTop: 300,
+	},
+	buttonContainer: {
+		flex: 1,
+		width: "100%",
+		alignItems: "center",
+		justifyContent: "flex-end",
+		marginBottom: 36,
 
-									 },
-									 bouton: {
-										 width: "100%",
-										 alignItems: "center",
-									 },
-									 buttonText: {
-										 color: "white",
-										 fontWeight: "bold",
-									 },
-									 forgotPassword: {
-										 marginTop: 10,
-									 },
-									 forgotPasswordText: {
-										 color: "#004080",
-										 fontWeight: "light",
-										 fontFamily: "Inter-Black",
-									 },
-									 signupLink: {
-										 marginTop: 20,
-									 },
-									 signupLinkText: {
-										 color: "#004080",
-										 fontWeight: "bold",
+	},
+	bouton: {
+		width: "100%",
+		alignItems: "center",
+	},
+	buttonText: {
+		color: "white",
+		fontWeight: "bold",
+	},
+	forgotPassword: {
+		marginTop: 10,
+	},
+	forgotPasswordText: {
+		color: "#004080",
+		fontWeight: "light",
+		fontFamily: "Inter-Black",
+	},
+	signupLink: {
+		marginTop: 20,
+	},
+	signupLinkText: {
+		color: "#004080",
+		fontWeight: "bold",
 
-									 },
-								 });
+	},
+});
 
 export default LoginPage;

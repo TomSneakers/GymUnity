@@ -1,13 +1,15 @@
 // LoginPage.js
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Button } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import signIn, { authService } from "../service/authService";
 import Bouton from "../components/Bouton";
 import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/Ionicons";
-
+import { useUser } from "../context/Context"; // Import du hook useUser
 
 const LoginPage = ({ navigation }) => {
+	const { updateUser } = useUser();
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -22,13 +24,35 @@ const LoginPage = ({ navigation }) => {
 		return null;
 	}
 
+	// Exemple d'affichage d'un message d'erreur
+	async function handleSubmit() {
+		if (!email || !/\S+@\S+\.\S+/.test(email)) {
+			Alert.alert("Erreur", "Veuillez entrer un email valide.");
+			return;
+		}
 
-	function handleSubmit() {
-		authService.signIn(email, password)
-			.then(() => navigation.navigate("MainTabs"))
-			.catch((e) => console.log(e));
-
+		if (!password) {
+			Alert.alert("Erreur", "Veuillez entrer votre mot de passe.");
+			return;
+		}
+		const res = await authService.signIn(email, password);
+		//	.then(() => {
+		await updateUser({ email })
+		navigation.navigate("MainTabs");
+		console.log("Connexion réussie");
+		//	})
+		/* 			.catch((error) => {
+						if (error.response && error.response.status === 404) {
+							// Cas où l'email n'est pas trouvé dans la base de données
+							console.log("Aucun compte trouvé pour cet email.");
+							Alert.alert("Erreur", "Aucun compte trouvé pour cet email.");
+						} else {
+							console.log("Erreur lors de la connexion:", error);
+							Alert.alert("Erreur", "Erreur lors de la connexion.");
+						}
+					}); */
 	}
+
 
 	return (
 		<View style={styles.container}>
@@ -58,9 +82,13 @@ const LoginPage = ({ navigation }) => {
 				</View>
 			</View>
 			<View style={styles.buttonContainer}>
-				<Bouton title="Se connecter" onPress={handleSubmit} style={styles.bouton} />
-				<TouchableOpacity style={styles.forgotPassword}
-					onPress={() => navigation.navigate("ForgotPasswordPage")}>
+				<Bouton
+					title="Se connecter"
+					onPress={handleSubmit}
+					disabled={!email || !/\S+@\S+\.\S+/.test(email) || !password}
+					style={styles.bouton}
+				/>
+				<TouchableOpacity style={styles.forgotPassword} onPress={() => navigation.navigate("ForgotPasswordPage")}>
 					<Text style={styles.forgotPasswordText}>Mot de passe oublié ?</Text>
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.signupLink} onPress={() => navigation.navigate("SignupPage")}>
@@ -70,6 +98,8 @@ const LoginPage = ({ navigation }) => {
 		</View>
 	);
 };
+
+// styles et autres fonctions comme togglePasswordVisibility restent inchangés
 
 
 

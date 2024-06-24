@@ -41,20 +41,27 @@ function signUp(email, username, password) {
 		});
 }
 
-function signIn(email, password) {
-	return FetchRequest.post("/login")
-		.withBody({ email, password })
-		.send()
-		.catch(e => {
-			console.error(JSON.stringify(e));
-			throw e;
-		})
-		.then(response => response.json())
-		.then(({ accessToken, refreshToken }) => {
-			// Assurez-vous que accessToken et refreshToken sont des chaînes de caractères
-			SecureStore.setItem("accessToken", String(accessToken));
-			SecureStore.setItem("refreshToken", String(refreshToken));
-		});
+async function signIn(email, password) {
+	let response;
+	try {
+		response = await FetchRequest.post("/login")
+			.withBody({ email, password })
+			.send();
+
+		if (!response.ok) {
+			// verifier le code d'erreur
+			throw new Error('Erreur lors de la connexion');
+
+		}
+		console.log('response:', response);
+		const { accessToken, refreshToken } = await response.json();
+		SecureStore.setItem("accessToken", String(accessToken));
+		SecureStore.setItem("refreshToken", String(refreshToken));
+	} catch (e) {
+		console.error(JSON.stringify(e));
+		throw e;
+	}
+
 }
 
 function refreshToken() {

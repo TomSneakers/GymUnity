@@ -1,36 +1,39 @@
+// ProfilePage.js
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import { useMe } from "../components/UseMe";
 import * as SecureStore from "expo-secure-store";
 import { useNavigation } from "@react-navigation/native";
+import { useUser } from "../context/Context"; // Import du hook useUser
 
 const ProfilePage = ({ route }) => {
-	const { me, loading } = useMe();
+	const { user } = useUser(); // Utilisation du hook useUser pour accéder aux données de l'utilisateur
 	const navigation = useNavigation();
 
-	if (loading) {
-		return <Text>Loading...</Text>;
-	}
-
-	if (!me) {
-		return <Text>Erreur lors du chargement des données utilisateur.</Text>;
-	}
+	const handleLogout = async () => {
+		await SecureStore.deleteItemAsync("accessToken");
+		await SecureStore.deleteItemAsync("refreshToken");
+		await SecureStore.deleteItemAsync("userData"); // Supprimer les données utilisateur de SecureStore lors de la déconnexion
+		navigation.navigate("WelcomePage");
+	};
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.heading}>Profile</Text>
-			<Text style={styles.description}>Hello {me.email}</Text>
+			<Text style={styles.heading}>Profil</Text>
+			{user ? (
+				<Text style={styles.description}>Bonjour {user.email}</Text>
+			) : (
+				<Text style={styles.description}>Chargement...</Text>
+			)}
 			<Button
 				title="Se déconnecter"
-				onPress={() => {
-					SecureStore.deleteItemAsync("accessToken");
-					SecureStore.deleteItemAsync("refreshToken");
-					navigation.navigate("WelcomePage");
-				}}
+				onPress={handleLogout}
 			/>
 		</View>
 	);
 };
+
+// styles restent inchangés
+
 
 
 const styles = StyleSheet.create({

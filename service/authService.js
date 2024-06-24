@@ -50,7 +50,9 @@ async function signIn(email, password) {
 
 		if (!response.ok) {
 			// verifier le code d'erreur
-			throw new Error('Erreur lors de la connexion');
+			throw new alert('Mail ou mot de passe incorrecte');
+			//Affiche moi un message d'erreur en Alert
+
 
 		}
 		console.log('response:', response);

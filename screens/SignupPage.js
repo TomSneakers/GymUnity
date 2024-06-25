@@ -1,7 +1,7 @@
 // SignupPage.js
 import React, { useState } from 'react';
 import { authService } from '../service/authService';
-import { Alert, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Alert, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import Bouton from '../components/Bouton';
 import { useFonts } from 'expo-font';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -32,18 +32,6 @@ const SignupPage = ({ navigation }) => {
         return null;
     }
 
-
-
-    // function handleSubmit() {
-    //     if (password !== confirmPassword) {
-    //         Alert.alert('Erreur', 'Les mots de passe ne correspondent pas');
-    //         return;
-    //     }
-
-    //     authService.signUp(email, username, password)
-    //         .then(() => navigation.navigate('LoginPage'))
-    //         .catch((e) => { Alert.alert('Erreur', Object.keys(e).map(key => e[key][0]).join("\n")) });
-    // }
     function handleSubmit() {
         if (password !== confirmPassword) {
             Alert.alert('Erreur', 'Les mots de passe ne correspondent pas');
@@ -72,76 +60,82 @@ const SignupPage = ({ navigation }) => {
 
 
     return (
-        <>
+        <SafeAreaView style={styles.safeArea}>
             <View style={styles.header}>
                 <TouchableOpacity onPress={goLogin}>
                     <Icon name="arrow-back" size={30} color="orange" />
                 </TouchableOpacity>
             </View>
-            <View style={styles.container}>
-                <View style={styles.inputContainer}>
-                    <Text style={styles.text}>Inscription</Text>
-                    <Text style={styles.label}>Nom & Prénom</Text>
-                    <TextInput style={styles.input} placeholder="Rocky Balboa" placeholderTextColor="#969AA8" onChangeText={setUsername} />
-                    <Text style={styles.label}>Email</Text>
-                    <TextInput style={styles.input} placeholder="xxxxx@xxxxx.com" placeholderTextColor="#969AA8" onChangeText={setEmail} />
+            <ScrollView>
+                <View style={styles.container}>
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.text}>Inscription</Text>
+                        <Text style={styles.label}>Nom & Prénom</Text>
+                        <TextInput style={styles.input} placeholder="Rocky Balboa" placeholderTextColor="#969AA8" onChangeText={setUsername} />
+                        <Text style={styles.label}>Email</Text>
+                        <TextInput style={styles.input} placeholder="xxxxx@xxxxx.com" placeholderTextColor="#969AA8" onChangeText={setEmail} />
 
 
-                    <Text style={styles.label}>Mot de passe</Text>
-                    <View style={styles.inputRow}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="********"
-                            placeholderTextColor="#969AA8"
-                            secureTextEntry={!isPasswordVisible}
-                            onChangeText={setPassword}
-                        />
-                        <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyes}>
-                            <Icon name={isPasswordVisible ? "eye-off" : "eye"} size={24} color="orange" />
+                        <Text style={styles.label}>Mot de passe</Text>
+                        <View style={styles.inputRow}>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="********"
+                                placeholderTextColor="#969AA8"
+                                secureTextEntry={!isPasswordVisible}
+                                onChangeText={setPassword}
+                            />
+                            <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyes}>
+                                <Icon name={isPasswordVisible ? "eye-off" : "eye"} size={24} color="orange" />
+                            </TouchableOpacity>
+                        </View>
+                        <Text style={styles.label}>Confirmation de mot de passe</Text>
+                        <View style={styles.inputRow}>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="********"
+                                placeholderTextColor="#969AA8"
+                                secureTextEntry={!isConfirmPasswordVisible}
+                                onChangeText={setConfirmPassword}
+                            />
+                            <TouchableOpacity onPress={toggleConfirmPasswordVisibility} style={styles.eyes}>
+                                <Icon name={isConfirmPasswordVisible ? "eye-off" : "eye"} size={24} color="orange" />
+                            </TouchableOpacity>
+                        </View>
+
+
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Bouton title="Inscription" onPress={handleSubmit} style={styles.bouton} />
+                        <TouchableOpacity style={styles.loginLink} onPress={goLogin}>
+                            <Text style={styles.buttonText}>Vous êtes déja inscrit ? </Text>
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.label}>Confirmation de mot de passe</Text>
-                    <View style={styles.inputRow}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="********"
-                            placeholderTextColor="#969AA8"
-                            secureTextEntry={!isConfirmPasswordVisible}
-                            onChangeText={setConfirmPassword}
-                        />
-                        <TouchableOpacity onPress={toggleConfirmPasswordVisibility} style={styles.eyes}>
-                            <Icon name={isConfirmPasswordVisible ? "eye-off" : "eye"} size={24} color="orange" />
-                        </TouchableOpacity>
-                    </View>
-
-
                 </View>
-                <View style={styles.buttonContainer}>
-                    <Bouton title="Inscription" onPress={handleSubmit} style={styles.bouton} />
-                    <TouchableOpacity style={styles.loginLink} onPress={goLogin}>
-                        <Text style={styles.buttonText}>Vous êtes déja inscrit ? </Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </>
+            </ScrollView>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        backgroundColor: '#FFF9F2',
+    },
     header: {
-        backgroundColor: 'white',
+        backgroundColor: 'transparent',
         justifyContent: 'flex-start',
-
-        paddingTop: 100,
+        paddingTop: 20,
         paddingLeft: 20,
 
     },
     container: {
-        backgroundColor: 'white',
+        backgroundColor: 'transparent',
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center', // Centrer horizontalement
         padding: 20,
+        paddingTop: 100,
     },
 
     text: {
@@ -183,7 +177,6 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'flex-start',
         justifyContent: 'flex-end',
-        marginTop: 350,
     },
     buttonContainer: {
         flex: 1,

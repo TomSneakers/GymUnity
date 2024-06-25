@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import { Text, TextInput, View, StyleSheet } from "react-native";
 
 export function StrengthExerciseConfigurator({ onChange }) {
   const [name, setName] = useState("");
@@ -19,33 +19,55 @@ export function StrengthExerciseConfigurator({ onChange }) {
   }, [name, sets, reps, weight, restTime]);
 
   return (
-    <View>
-      <Text>Nom de l'exercice</Text>
-      <TextInput value={name} onChangeText={setName} />
-      <Text>Nombre de série</Text>
+    <View style={styles.container}>
       <TextInput
+        style={styles.input}
+        placeholder="Nom de l'exercice"
+        value={name}
+        onChangeText={setName}
+      />
+      <TextInput
+        style={styles.input}
         keyboardType="numeric"
         value={sets}
+        placeholder="Nombre de série"
         onChangeText={(value) => setSets(value)}
       />
-      <Text>Nombres de répétitions</Text>
       <TextInput
+        style={styles.input}
         keyboardType="numeric"
+        placeholder="Nombre de répétitions"
         value={reps}
         onChangeText={(value) => setReps(value)}
       />
-      <Text>Poids</Text>
       <TextInput
+        style={styles.input}
         keyboardType="numeric"
+        placeholder="Poids en kg"
         value={weight}
         onChangeText={(value) => setWeight(value)}
       />
-      <Text>Temps de repos</Text>
       <TextInput
+        style={styles.input}
         keyboardType="numeric"
+        placeholder="Temps de repos en secondes"
         value={restTime}
         onChangeText={(value) => setRestTime(value)}
       />
     </View>
   );
 }
+//style
+const styles = StyleSheet.create({
+  container: {
+    margin: 0,
+  },
+  input: {
+    backgroundColor: "#FFF9F2",
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: "#FFA500",
+  },
+});

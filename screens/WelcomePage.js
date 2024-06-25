@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         padding: 20,
-        backgroundColor: 'white',
+        backgroundColor: '#FFF9F2',
     },
     textContainer: {
         marginBottom: 20,

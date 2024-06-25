@@ -62,7 +62,7 @@ const ProfilePage = () => {
 					))}
 					<TouchableOpacity style={styles.menuItem} onPress={handleLogout}>
 						<View style={styles.menuItemIcon}>
-							<Image source={require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/coche.png')} style={styles.icon} />
+							<Image source={require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/shield_109123.png')} style={styles.icon} />
 						</View>
 						<Text style={styles.menuItemText}>Logout</Text>
 					</TouchableOpacity>
@@ -73,11 +73,11 @@ const ProfilePage = () => {
 };
 
 const menuItems = [
-	{ label: 'Profile', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/coche.png') },
-	{ label: 'Favorite', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/coche.png') },
-	{ label: 'Privacy Policy', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/coche.png') },
-	{ label: 'Settings', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/coche.png') },
-	{ label: 'Help', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/coche.png') },
+	{ label: 'Profile', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/decision-making_16330913.png') },
+	{ label: 'Favorite', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/favorite_222298.png') },
+	{ label: 'Privacy Policy', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/shield_109123.png') },
+	{ label: 'Settings', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/setting_4255672.png') },
+	{ label: 'Help', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/help_2081580.png') },
 ];
 
 const styles = StyleSheet.create({

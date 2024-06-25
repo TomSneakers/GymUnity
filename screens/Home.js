@@ -4,6 +4,7 @@ import * as SecureStore from "expo-secure-store";
 import { useNavigation } from "@react-navigation/native";
 import { useUser } from "../context/Context"; // Import du hook useUser
 import { SafeAreaView } from 'react-native-safe-area-context';
+import EditProfilePage from "./EditProfilePage";
 
 const ProfilePage = () => {
 	const { user } = useUser(); // Utilisation du hook useUser pour accéder aux données de l'utilisateur
@@ -53,7 +54,7 @@ const ProfilePage = () => {
 				</View>
 				<View style={styles.menuContainer}>
 					{menuItems.map((item, index) => (
-						<TouchableOpacity key={index} style={styles.menuItem}>
+						<TouchableOpacity key={index} style={styles.menuItem} onPress={navigation.navigate("")}>
 							<View style={styles.menuItemIcon}>
 								<Image source={item.icon} style={styles.icon} />
 							</View>
@@ -73,7 +74,7 @@ const ProfilePage = () => {
 };
 
 const menuItems = [
-	{ label: 'Profile', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/decision-making_16330913.png') },
+	{ label: 'Profile', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/decision-making_16330913.png'), link: 'EditProfilePage', },
 	{ label: 'Favorite', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/favorite_222298.png') },
 	{ label: 'Privacy Policy', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/shield_109123.png') },
 	{ label: 'Settings', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/setting_4255672.png') },
@@ -107,9 +108,9 @@ const styles = StyleSheet.create({
 		marginVertical: 20,
 	},
 	profileImage: {
-		width: 200,
-		height: 200,
-		borderRadius: 100,
+		width: 100,
+		height: 100,
+		borderRadius: 500,
 	},
 	profileName: {
 		fontSize: 20,

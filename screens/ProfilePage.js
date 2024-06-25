@@ -4,6 +4,7 @@ import * as SecureStore from "expo-secure-store";
 import { useNavigation } from "@react-navigation/native";
 import { useUser } from "../context/Context"; // Import du hook useUser
 import { SafeAreaView } from 'react-native-safe-area-context';
+import EditProfilePage from "./EditProfilePage";
 
 const ProfilePage = () => {
 	const { user } = useUser(); // Utilisation du hook useUser pour accéder aux données de l'utilisateur
@@ -15,7 +16,7 @@ const ProfilePage = () => {
 		await SecureStore.deleteItemAsync("userData"); // Supprimer les données utilisateur de SecureStore lors de la déconnexion
 		navigation.navigate("WelcomePage");
 	};
-
+	
 	if (!user) {
 		return (
 			<View style={styles.container}>
@@ -52,14 +53,43 @@ const ProfilePage = () => {
 					</View>
 				</View>
 				<View style={styles.menuContainer}>
-					{menuItems.map((item, index) => (
-						<TouchableOpacity key={index} style={styles.menuItem}>
+					{/* {menuItems.map((item, index) => (
+						<TouchableOpacity key={index} style={styles.menuItem} onPress={navigation.navigate(link)}>
 							<View style={styles.menuItemIcon}>
 								<Image source={item.icon} style={styles.icon} />
 							</View>
 							<Text style={styles.menuItemText}>{item.label}</Text>
 						</TouchableOpacity>
-					))}
+					))} */}
+					<TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("EditProfilePage")}>
+						<View style={styles.menuItemIcon}>
+							<Image source={require('../assets/icon/decision-making_16330913.png')} style={styles.icon} />
+						</View>
+						<Text style={styles.menuItemText}>Edite Profile</Text>
+					</TouchableOpacity>
+					
+					<TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("EditProfilePage")}>
+						<View style={styles.menuItemIcon}>
+							<Image source={require('../assets/icon/favorite_222298.png')} style={styles.icon} />
+						</View>
+						<Text style={styles.menuItemText}>Favorite</Text>
+					</TouchableOpacity><TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("EditProfilePage")}>
+						<View style={styles.menuItemIcon}>
+							<Image source={require('../assets/icon/shield_109123.png')} style={styles.icon} />
+						</View>
+						<Text style={styles.menuItemText}>Privacy Policy</Text>
+					</TouchableOpacity><TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("EditProfilePage")}>
+						<View style={styles.menuItemIcon}>
+							<Image source={require('../assets/icon/setting_4255672.png')} style={styles.icon} />
+						</View>
+						<Text style={styles.menuItemText}>Settings</Text>
+					</TouchableOpacity><TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("EditProfilePage")}>
+						<View style={styles.menuItemIcon}>
+							<Image source={require('../assets/icon/help_2081580.png')} style={styles.icon} />
+						</View>
+						<Text style={styles.menuItemText}>Help</Text>
+					</TouchableOpacity>
+
 					<TouchableOpacity style={styles.menuItem} onPress={handleLogout}>
 						<View style={styles.menuItemIcon}>
 							<Image source={require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/icon.logout.png')} style={styles.icon} />
@@ -72,13 +102,6 @@ const ProfilePage = () => {
 	);
 };
 
-const menuItems = [
-	{ label: 'Profile', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/decision-making_16330913.png') },
-	{ label: 'Favorite', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/favorite_222298.png') },
-	{ label: 'Privacy Policy', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/shield_109123.png') },
-	{ label: 'Settings', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/setting_4255672.png') },
-	{ label: 'Help', icon: require('/Users/adamhocini/Documents/Isitech/B3/Gym/assets/icon/help_2081580.png') },
-];
 
 const styles = StyleSheet.create({
 	safeArea: {
@@ -107,9 +130,9 @@ const styles = StyleSheet.create({
 		marginVertical: 20,
 	},
 	profileImage: {
-		width: 200,
-		height: 200,
-		borderRadius: 100,
+		width: 100,
+		height: 100,
+		borderRadius: 500,
 	},
 	profileName: {
 		fontSize: 20,

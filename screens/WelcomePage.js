@@ -14,7 +14,7 @@ const WelcomePage = () => {
             <Image source={require('../assets/logo.png')} style={styles.logo} />
 
             <View style={styles.textContainer}>
-                <Text style={styles.heading}>C'est partie pour de nouvelle aventure</Text>
+                <Text style={styles.heading}>C'est partie pour de nouveaux entrainements !</Text>
             </View>
             <View style={styles.buttonContainer}>
                 <Bouton title="Commencer" onPress={() => navigation.navigate('AuthStack')} />
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     logo: {
         width: 600,
         height: 600,
-        position: 'relative',
+        position: 'absolute',
         left: 0,
         top: 50,
         transform: [{ translateX: -100 }, { translateY: -50 }],

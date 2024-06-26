@@ -4,7 +4,7 @@ import { Ionicons, FontAwesome6, Entypo } from "@expo/vector-icons";
 
 import ProfilePage from "../screens/ProfilePage";
 import Communication from "../screens/Communication";
-import Entrainement from "../screens/Entrainement";
+import ListeEntrainement from "../screens/ListeEntrainement";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CreateTraining from "./createTraining";
@@ -53,7 +53,7 @@ const MainTabs = () => {
 					<Entypo name="chat" color={color} size={38} />
 				),
 			}} />
-			<Tab.Screen name="Entrainement" component={Entrainement} options={{
+			<Tab.Screen name="ListeEntrainement" component={ListeEntrainement} options={{
 				tabBarLabel: "",
 				tabBarIcon: ({ color }) => (
 					<FontAwesome6 name="dumbbell" color={color} size={35} />

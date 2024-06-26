@@ -11,7 +11,7 @@ const WelcomePage = () => {
 
     return (
         <View style={styles.container}>
-            <Image source={require('../assets/logo.png')} style={styles.logo} />
+            <Image source={require('../assets/Login/logo.png')} style={styles.logo} />
 
             <View style={styles.textContainer}>
                 <Text style={styles.heading}>C'est partie pour de nouvelle aventure</Text>

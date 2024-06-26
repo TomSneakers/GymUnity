@@ -6,7 +6,7 @@ import Bouton from '../components/Bouton';
 import { useFonts } from 'expo-font';
 
 
-const AfterSignup = ({ navigation }) => {
+const Landing = ({ navigation }) => {
     const [fontsLoaded, fontError] = useFonts({
         'Inter-Black': require('../assets/fonts/Inter-black.ttf'),
     });
@@ -18,7 +18,7 @@ const AfterSignup = ({ navigation }) => {
         <>
             <View style={styles.container}>
                 <View styles={styles.imageContainer}>
-                    <Image source={require('../assets/coche.png')} style={{ width: 450, height: 450, alignSelf: 'center' }} />
+                    <Image source={require('../assets/Login/coche.png')} style={{ width: 450, height: 450, alignSelf: 'center' }} />
                 </View>
                 <Text style={styles.textFelicitation}>Félicitations !</Text>
                 <Text style={styles.text}>Votre inscription sur notre plateforme a été un succès. Nous sommes ravis de vous compter parmi nos membres.</Text>
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AfterSignup;
+export default Landing;

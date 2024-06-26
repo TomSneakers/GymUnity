@@ -56,7 +56,7 @@ export default function CreateTraining() {
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity title={"Ajouter un exercice"} onPress={handleAddExercise} >
                             <Image
-                                source={require("../assets/plus.png")}
+                                source={require("../assets/Training/plus.png")}
                                 style={styles.buttonImage}
                             />
                         </TouchableOpacity>

@@ -28,7 +28,7 @@ export function ExerciseConfigurator({ onChange, index, onRemove }) {
 
   return (
     <View style={styles.configurator}>
-      <Text style={styles.text}>Choisir le type d'exercice :</Text>
+      <Text style={styles.text}>Type d'exercice</Text>
       <View style={styles.buttonContainer}>
         <View>
           <TouchableOpacity
@@ -43,7 +43,7 @@ export function ExerciseConfigurator({ onChange, index, onRemove }) {
               style={styles.gradient}
             >
               <Image
-                source={require("../../../assets/strenght.png")}
+                source={require("../../../assets/Training/strenght.png")}
                 style={styles.buttonImage}
               />
             </LinearGradient>
@@ -63,7 +63,7 @@ export function ExerciseConfigurator({ onChange, index, onRemove }) {
               style={styles.gradient}
             >
               <Image
-                source={require("../../../assets/cardio.png")}
+                source={require("../../../assets/Training/cardio.png")}
                 style={styles.buttonImageCardio}
               />
             </LinearGradient>
@@ -108,6 +108,8 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: "#004080",
     fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -158,8 +160,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     width: "30%",
     alignItems: "center",
-    marginTop: 20,
-    alignSelf: "flex-end",
+    marginTop: 40,
+    alignSelf: "center",
     marginBottom: 20,
   },
   buttonText: {

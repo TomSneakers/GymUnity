@@ -21,7 +21,7 @@ const MainMenu2 = () => {
             </TouchableOpacity>
             <TouchableOpacity onPress={handleMessagesPress} style={styles.messagesContainer}>
                 <Image source={require('../assets/icon/decision-making_16330913.png')} style={styles.icon} />
-            </TouchableOpacity>
+            </TouchableOpacity> 
         </View>
     );
 };

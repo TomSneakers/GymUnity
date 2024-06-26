@@ -81,9 +81,9 @@ const ProfilePage = () => {
 					</TouchableOpacity><TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("EditProfilePage")}>
 						<View style={styles.menuItemIcon}>
 							<Image source={require('../assets/icon/setting_4255672.png')} style={styles.icon} />
-						</View>
+						</View> 
 						<Text style={styles.menuItemText}>Settings</Text>
-					</TouchableOpacity><TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("EditProfilePage")}>
+					</TouchableOpacity><TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("Settings")}>
 						<View style={styles.menuItemIcon}>
 							<Image source={require('../assets/icon/help_2081580.png')} style={styles.icon} />
 						</View>

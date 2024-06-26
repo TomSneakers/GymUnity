@@ -7,8 +7,11 @@ import MainTabs from "./components/MainTabs";
 import Entrainement from "./screens/Entrainement";
 import WelcomePage from "./screens/WelcomePage";
 import AfterSignup from "./screens/AfterSignup";
-import EditProfilePage from "./screens/EditProfilePage"
+import EditProfilePage from "./screens/EditProfilePage";
+import SettingsPage from "./screens/SettingsPage";
+import HomePage from "./screens/HomePage";
 import { UserProvider } from "./context/Context";
+
 
 const Stack = createStackNavigator();
 
@@ -23,6 +26,8 @@ const App = () => {
 					<Stack.Screen name="WelcomePage" component={WelcomePage} />
 					<Stack.Screen name="AfterSignup" component={AfterSignup} />
 					<Stack.Screen name="EditProfilePage" component={EditProfilePage} />
+					<Stack.Screen name="SettingsPage" component={SettingsPage} />
+					<Stack.Screen name="HomePage" component={HomePage} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</UserProvider>

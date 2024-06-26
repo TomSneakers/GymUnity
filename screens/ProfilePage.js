@@ -5,6 +5,9 @@ import { useNavigation } from "@react-navigation/native";
 import { useUser } from "../context/Context"; // Import du hook useUser
 import { SafeAreaView } from 'react-native-safe-area-context';
 import EditProfilePage from "./EditProfilePage";
+import SettingsPage from "./SettingsPage";
+import MainMenu2 from "../components/MainMenu2";
+
 
 const ProfilePage = () => {
 	const { user } = useUser(); // Utilisation du hook useUser pour accéder aux données de l'utilisateur
@@ -25,15 +28,39 @@ const ProfilePage = () => {
 		);
 	}
 
+	const handleBackPress = () => {
+        navigation.navigate("HomePage");
+    };
+
+    if (!user) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.description}>Chargement...</Text>
+            </View>
+        );
+    }
+	
+       
+    
+
 	return (
 		<SafeAreaView style={styles.safeArea}>
 			<ScrollView contentContainerStyle={styles.container}>
+			<SafeAreaView style={styles.safeArea}>
+            <MainMenu2 />
+            <ScrollView contentContainerStyle={styles.container}>
+                {/* Reste du contenu de la page */}
+            </ScrollView>
+        </SafeAreaView>
 
 				<View style={styles.header}>
-					<Text style={styles.headerText}>My Profile</Text>
+					<TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
+                        <Image source={require('../assets/icon/home_222306.png')} style={styles.backIcon} />
+                    </TouchableOpacity>
+                    <Text style={styles.headerText}>My Profile</Text>				
 				</View>
 				<View style={styles.profileContainer}>
-					<Image source={{ uri: '/Users/adamhocini/Documents/Isitech/B3/Gym/assets/photodeprofil.png' }} style={styles.profileImage} />
+					<Image source={require('../assets/photodeprofil/photodeprofil1.png')} style={styles.profileImage} />
 					<Text style={styles.profileName}>Madison Smith</Text>
 					<Text style={styles.profileEmail}>{user.email}</Text>
 					<Text style={styles.profileBirthday}>Birthday: April 1st</Text>
@@ -73,20 +100,23 @@ const ProfilePage = () => {
 							<Image source={require('../assets/icon/favorite_222298.png')} style={styles.icon} />
 						</View>
 						<Text style={styles.menuItemText}>Favorite</Text>
-					</TouchableOpacity><TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("EditProfilePage")}>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("EditProfilePage")}>
 						<View style={styles.menuItemIcon}>
 							<Image source={require('../assets/icon/shield_109123.png')} style={styles.icon} />
 						</View>
 						<Text style={styles.menuItemText}>Privacy Policy</Text>
-					</TouchableOpacity><TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("EditProfilePage")}>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("SettingsPage")}>
 						<View style={styles.menuItemIcon}>
 							<Image source={require('../assets/icon/setting_4255672.png')} style={styles.icon} />
-						</View> 
+						</View>
 						<Text style={styles.menuItemText}>Settings</Text>
-					</TouchableOpacity><TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("Settings")}>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("EditProfilePage")}>
 						<View style={styles.menuItemIcon}>
 							<Image source={require('../assets/icon/help_2081580.png')} style={styles.icon} />
-						</View>
+						</View> 
 						<Text style={styles.menuItemText}>Help</Text>
 					</TouchableOpacity>
 
@@ -118,8 +148,16 @@ const styles = StyleSheet.create({
 		paddingVertical: 30,
 		alignItems: 'flex-start',
 		paddingHorizontal: 30,
+		flexDirection: 'row',
 
 	},
+	backButton: {
+        marginRight: 10,
+    },
+	backIcon: {
+        width: 24,
+        height: 24,
+    },
 	headerText: {
 		color: '#FFF9F2',
 		fontSize: 20,

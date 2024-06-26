@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
 
 const posts = [
     {
@@ -7,14 +7,14 @@ const posts = [
         user: 'John Doe',
         type: 'Cardio',
         result: '5 km in 30 minutes',
-        image: require('/path/to/cardio_image.png'),
+        image: require('../assets/icon.png'),
     },
     {
         id: '2',
         user: 'Jane Smith',
         type: 'Muscle',
         result: '50 push-ups',
-        image: require('/path/to/muscle_image.png'),
+        image: require('../assets/coche.png'),
     },
     // Ajoutez plus de posts ici
 ];
@@ -32,7 +32,7 @@ const PostItem = ({ post }) => (
     </View>
 );
 
-const Home = () => {
+const HomePage = () => {
     return (
         <View style={styles.container}>
             <FlatList 
@@ -95,4 +95,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Home;
+export default HomePage;

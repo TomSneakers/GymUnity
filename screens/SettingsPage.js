@@ -1,10 +1,10 @@
-// Settings.js
+// SettingsPage.js
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Switch, TouchableOpacity, ScrollView, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const Settings = () => {
+const SettingsPage = () => {
     const [isProfilePublic, setIsProfilePublic] = useState(true);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -136,4 +136,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Settings;
+export default SettingsPage;

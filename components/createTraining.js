@@ -29,6 +29,13 @@ export default function CreateTraining() {
 
     const handleCreateTraining = () => {
         trainingService.createTraining({ title, description, exercises })
+            .then(() => Alert.alert('Succès', 'Entraînement créé avec succès'))
+            .then(() => {
+                setTitle('');
+                setDescription('');
+                setExercises([{}]);
+                handleRemove(0);
+            })
             .catch((e) => Alert.alert('Erreur', "Erreur lors de la création de l'entraînement"));
     };
 

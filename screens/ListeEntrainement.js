@@ -1,12 +1,42 @@
-import React, { useState } from "react";
-import { View, Image, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from "react-native";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import React, { useState, useEffect, useMemo } from "react";
+import { View, Text, TouchableOpacity, Alert, StyleSheet, SafeAreaView, ScrollView, RefreshControl, Image } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import { trainingService } from "../service/trainingService";
 import Filter from "../components/ListeExercise/Filter";
 import Search from "../components/ListeExercise/Search";
-export default function ListeEntrainement({ navigation }) {
+
+export default function ListeEntrainement() {
+	const navigation = useNavigation();
+	const [trainings, setTrainings] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 	const [starredItems, setStarredItems] = useState([false, false, false]);
 	const [isStarred, setIsStarred] = useState(false); // État pour le filtre
 	const [search, setSearch] = useState(''); // État pour la recherche
+	const [refreshing, setRefreshing] = useState(false);
+
+	useEffect(() => {
+		getTrainings();
+	}, []);
+
+	const getTrainings = () => {
+		trainingService.getTrainings()
+			.then((data) => {
+				setTrainings(data);
+				setIsLoading(false);
+			})
+			.catch((error) => {
+				Alert.alert("Erreur", error);
+				setIsLoading(false);
+			});
+	};
+
+	const onRefresh = () => {
+		setRefreshing(true);
+		setTimeout(() => {
+			getTrainings();
+			setRefreshing(false);
+		}, 2000);
+	};
 
 	const toggleStar = (index) => {
 		const updatedStarredItems = [...starredItems];
@@ -14,45 +44,61 @@ export default function ListeEntrainement({ navigation }) {
 		setStarredItems(updatedStarredItems);
 	};
 
-	const filteredItems = (isStarred ? starredItems.map((starred, index) => starred ? index : null).filter(index => index !== null) : [0, 1, 2])
-		.filter(index => `Entrainement ${index + 1}`.toLowerCase().includes(search.toLowerCase()));
+	const filteredTrainings = useMemo(() => {
+		if (!isStarred && !search) return trainings;
+
+		return trainings.filter(item => {
+			const matchesSearch = search === '' || item.title.toLowerCase().includes(search.toLowerCase());
+			const isStarredItem = isStarred ? starredItems[item.id - 1] : true; // Assuming item.id is unique and starts from 1
+			return matchesSearch && isStarredItem;
+		});
+	}, [trainings, starredItems, isStarred, search]);
+
+	const navigateToTraining = (training, getTrainings) => {
+		navigation.navigate('EntrainementDetails', { training, getTrainings });
+	};
+
+	if (isLoading) {
+		return (
+			<View style={styles.container}>
+				<Text>Chargement...</Text>
+			</View>
+		);
+	}
 
 	return (
 		<SafeAreaView style={styles.safeArea}>
-			<ScrollView contentContainerStyle={styles.ScrollView}>
+			<ScrollView
+				contentContainerStyle={styles.scrollViewContent}
+				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+			>
 				<View style={styles.container}>
 					<Text style={styles.title}>Entrainements</Text>
 					<View style={styles.underline} />
 					<Filter isStarred={isStarred} setIsStarred={setIsStarred} />
 					<Search search={search} setSearch={setSearch} />
 
-					{filteredItems.map((index) => (
-						<View style={styles.itemContainer} key={index}>
-							<TouchableOpacity style={styles.bouton} onPress={() => navigation.navigate("Entrainement")}>
-								<View style={styles.item}>
-									<View style={styles.textuel}>
-										<Text style={styles.itemTitle}>Entrainement {index + 1}</Text>
+					{filteredTrainings.map((item) => (
+						<TouchableOpacity
+							key={item.id}
+							style={styles.itemContainer}
+							onPress={() => navigateToTraining(item)}
+						>
 
-										<View style={styles.itemCountContainer}>
-											<View style={styles.timeCountContainer}>
-												<Image source={require('../assets/Training/time.png')} style={styles.imageTime} />
-												<Text style={styles.timeNumber}>10 Minutes</Text>
-											</View>
-											<View style={styles.exerciseCountContainer}>
-												<Image source={require('../assets/Training/exerciseImage.png')} style={styles.exerciseTime} />
-												<Text style={styles.exerciseNumber}>10 Exercices</Text>
-											</View>
-										</View>
-									</View>
-									<View style={styles.itemImage}>
-										<TouchableOpacity onPress={() => toggleStar(index)} style={styles.star}>
-											<FontAwesome name={starredItems[index] ? "star" : "star-o"} size={30} color="#FFA500" />
-										</TouchableOpacity>
-										<Image source={require('../assets/Training/entrainement.png')} style={styles.image} />
-									</View>
+							<View style={styles.textuel}>
+								<Text style={styles.itemTitle}>{item.title}</Text>
+								<Text style={styles.itemDescription}>{item.description}</Text>
+								<View style={{ flexDirection: 'row', justifyContent: 'start', marginLeft: 15, marginTop: 20 }}>
+									<Image source={require('../assets/Training/exerciseImage.png')} style={{ width: 20, height: 20, marginRight: 5 }} />
+									<Text style={styles.itemCount}>
+										{item.exercises.length} {item.exercises.length > 1 ? 'Exercices' : 'Exercice'}
+									</Text>
 								</View>
-							</TouchableOpacity>
-						</View>
+							</View>
+							<View style={styles.visuel}>
+								<Image style={styles.image} source={item.exercises.filter(exercise => exercise.type === 'Cardio').length > item.exercises.filter(exercise => exercise.type === 'Strength').length ? require('../assets/Training/cardioRed.jpeg') : require('../assets/Training/muscu.jpeg')} />
+							</View>
+						</TouchableOpacity>
 					))}
 				</View>
 			</ScrollView>
@@ -62,14 +108,21 @@ export default function ListeEntrainement({ navigation }) {
 
 const styles = StyleSheet.create({
 	safeArea: {
-		backgroundColor: "#FFF9F2",
 		flex: 1,
+		backgroundColor: "#FFF9F2",
+	},
+	scrollViewContent: {
+		flexGrow: 1,
+		paddingBottom: 20,
+	},
+	container: {
+		paddingHorizontal: 20,
+		paddingTop: 20,
+		marginBottom: 20,
 	},
 	title: {
 		fontSize: 25,
 		fontWeight: 'bold',
-		paddingTop: 20,
-		marginBottom: 10,
 		textAlign: 'center',
 		color: '#004080',
 	},
@@ -77,78 +130,54 @@ const styles = StyleSheet.create({
 		height: 2,
 		backgroundColor: '#FFA500',
 		width: 90,
-		marginBottom: 20,
 		alignSelf: 'center',
-	},
-	itemContainer: {
-		padding: 10,
-		borderRadius: 5,
-	},
-	bouton: {
-		backgroundColor: "#FFF9F2",
-		paddingVertical: 50,
-		paddingLeft: 20,
-		borderRadius: 30,
-		width: '100%',
-		height: 115,
-		justifyContent: 'center',
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 1,
-		},
-		shadowOpacity: 0.2,
-		shadowRadius: 1.41,
-		elevation: 2,
-	},
-	item: {
-		flexDirection: 'row',
-	},
-	itemTitle: {
-		fontSize: 30,
-		fontWeight: 'bold',
-		color: '#004080',
-		paddingRight: 20,
-		paddingTop: 10,
-	},
-	itemCountContainer: {
-		marginTop: 10,
-		width: '50%',
-	},
-	itemImage: {
-		flex: 1,
-		position: 'relative',
-		alignItems: 'flex-end',
-		width: '50%',
-	},
-	image: {
-		height: 115,
-		width: "100%",
-		paddingLeft: 30,
-	},
-	star: {
-		position: 'absolute',
-		top: 10,
-		right: 10,
-		zIndex: 1,
-	},
-	imageTime: {
-		height: 15,
-		width: 15,
-		marginRight: 5,
-	},
-	timeCountContainer: {
-		flexDirection: 'row',
-		width: "100%",
 		marginBottom: 10,
 	},
-	exerciseCountContainer: {
+	itemContainer: {
 		flexDirection: 'row',
-		width: "100%",
+		backgroundColor: "#E0E1EF",
+		marginTop: 30,
+		height: 120,
+		borderRadius: 20,
 	},
-	exerciseTime: {
-		height: 15,
-		width: 15,
-		marginRight: 5,
+	textuel: {
+		flex: 1,
+		width: "50%",
+	},
+	visuel: {
+		flex: 1,
+		width: "50%",
+		alignItems: 'flex-end',
+		justifyContent: 'flex-end',
+		alignContent: 'flex-end',
+		alignSelf: 'flex-end',
+	},
+
+	itemTitle: {
+		fontSize: 20,
+		fontWeight: "bold",
+		color: "004080",
+		marginHorizontal: 15,
+		marginTop: 20,
+		fontFamily: 'Poppins_600SemiBold',
+		textTransform: 'uppercase',
+
+	},
+	itemDescription: {
+		fontSize: 14,
+		color: "#666",
+		marginHorizontal: 15,
+	},
+	itemCount: {
+		fontSize: 12,
+		color: "#999",
+	},
+	image: {
+		width: "100%",
+		height: 120,
+		alignSelf: 'flex-end',
+		marginTop: 10,
+		borderTopLeftRadius: 20,
+		borderBottomLeftRadius: 20,
 	},
 });

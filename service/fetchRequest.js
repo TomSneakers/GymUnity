@@ -29,11 +29,11 @@ export class FetchRequest {
 	async send() {
 		if (this.isUsingAuthorization) {
 			const accessToken = getItem("accessToken");
-			console.log(accessToken);
+
 			this.addHeader("Authorization", `Bearer ${accessToken}`);
 		}
 
-		console.log(this);
+		// console.log(this);
 		return fetch(this.url, {
 			method: this.method,
 			headers: this.headers,

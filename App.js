@@ -8,7 +8,7 @@ import ListeEntrainement from "./screens/ListeEntrainement";
 import WelcomePage from "./screens/WelcomePage";
 import Landing from "./screens/Landing";
 import { UserProvider } from "./context/Context";
-import Entrainement from "./screens/Entrainement";
+import EntrainementDetails from "./screens/EntrainementDetails";
 
 
 const Stack = createStackNavigator();
@@ -23,9 +23,7 @@ const App = () => {
 					<Stack.Screen name="ListeEntrainement" component={ListeEntrainement} />
 					<Stack.Screen name="WelcomePage" component={WelcomePage} />
 					<Stack.Screen name="Landing" component={Landing} />
-					<Stack.Screen name="Entrainement" component={Entrainement} />
-
-
+					<Stack.Screen name="EntrainementDetails" component={EntrainementDetails} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</UserProvider>

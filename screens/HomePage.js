@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
+import { View, Text, Image, FlatList, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import MainMenu2 from '../components/MainMenu2';
+import * as SecureStore from "expo-secure-store";
+import { useNavigation } from "@react-navigation/native";
+import { useUser } from "../context/Context"; // Import du hook useUser
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const posts = [
     {
@@ -33,65 +38,42 @@ const PostItem = ({ post }) => (
 );
 
 const HomePage = () => {
+    const { user } = useUser(); // Utilisation du hook useUser pour accéder aux données de l'utilisateur
+    const navigation = useNavigation();
+
+    const handleLogout = async () => {
+        await SecureStore.deleteItemAsync("accessToken");
+        await SecureStore.deleteItemAsync("refreshToken");
+        await SecureStore.deleteItemAsync("userData"); // Supprimer les données utilisateur de SecureStore lors de la déconnexion
+        navigation.navigate("WelcomePage");
+    };
+
+    if (!user) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.description}>Chargement...</Text>
+            </View>
+        );
+    }
+
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={posts}
-                renderItem={({ item }) => <PostItem post={item} />}
-                keyExtractor={item => item.id}
-                contentContainerStyle={styles.feedContainer}
-            />
-        </View>
+        <SafeAreaView style={styles.safeArea}>
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
+                <Image source={require('../assets/hompage.jpeg')} style={styles.profileImage} />
+                <Image source={require('../assets/hompage.jpeg')} style={styles.profileImage} />
+            </ScrollView>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    safeArea: {
         flex: 1,
-        backgroundColor: '#f9f9f9',
+        backgroundColor: '#f0f0f0',
+        height: '100%',
     },
-    feedContainer: {
-        padding: 20,
-    },
-    postContainer: {
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        padding: 15,
-        marginBottom: 20,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
-        elevation: 2,
-    },
-    postHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 10,
-    },
-    postUser: {
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    postImage: {
-        width: '100%',
-        height: 200,
-        borderRadius: 10,
-        marginBottom: 10,
-    },
-    postContent: {
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-    },
-    postType: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: '#4CAF50',
-    },
-    postResult: {
-        fontSize: 14,
-        color: '#333',
+    scrollContainer: {
+        flexGrow: 1,
     },
 });
 

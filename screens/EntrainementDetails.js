@@ -7,6 +7,8 @@ import StrenghtExercice from "../components/Exercise/StrenghtExercice";
 import CardioExercice from "../components/Exercise/CardioExercice";
 import { useNavigation } from '@react-navigation/native';
 import HeaderExercise from "../components/Exercise/HeaderExercise";
+
+
 export default function EntrainementDetails() {
     const [isActive, setIsActive] = useState(false);
     const route = useRoute();

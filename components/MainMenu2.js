@@ -6,11 +6,13 @@ const MainMenu2 = () => {
     const navigation = useNavigation();
 
     const handleLogoPress = () => {
+        console.log(('handleLogPress clicked'));
         navigation.navigate('HomePage');
     };
 
     const handleMessagesPress = () => {
-        navigation.navigate('MessagesPage'); // Assurez-vous que le nom de l'écran de messages est correct
+        console.log('i am cliked');
+        navigation.navigate('MessagesPage');
     };
 
     return (
@@ -22,6 +24,7 @@ const MainMenu2 = () => {
             <TouchableOpacity onPress={handleMessagesPress} style={styles.messagesContainer}>
                 <Image source={require('../assets/icon/decision-making_16330913.png')} style={styles.icon} />
             </TouchableOpacity>
+
         </View>
     );
 };

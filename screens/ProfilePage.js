@@ -26,6 +26,10 @@ const ProfilePage = () => {
 		);
 	}
 
+	const handleBackPress = () => {
+		navigation.navigate("HomePage");
+	};
+
 	return (
 		<SafeAreaView style={styles.safeArea}>
 			<MainMenu2 />
@@ -122,6 +126,8 @@ const styles = StyleSheet.create({
 		width: 100,
 		height: 100,
 		borderRadius: 50,
+		borderColor: "#FFA500",
+		borderWidth: 3,
 	},
 	profileName: {
 		fontSize: 20,

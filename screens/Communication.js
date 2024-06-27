@@ -1,14 +1,38 @@
 // Communication.js
 
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import Search from '../components/ListeExercise/Search';
+import { useNavigation } from '@react-navigation/native';
 
 const Communication = () => {
+    const [refreshing, setRefreshing] = useState(false);
+    const onRefresh = () => {
+        setRefreshing(true);
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 2000);
+    }
+    const navigation = useNavigation();
+    const navigateToChat = () => {
+        navigation.navigate('Chat');
+    }
     return (
-        <View style={styles.container}>
-            <Text style={styles.heading}>Communication</Text>
-            {/* Ajoute d'autres éléments de la page de profil ici */}
-        </View>
+
+        <SafeAreaView style={styles.container}>
+            <ScrollView>
+                <Search />
+
+                <View style={styles.container}>
+
+                    <Text style={styles.heading}>Conversations</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('Chat', { name: 'Jane' })}>
+                        <Text>Jane</Text>
+                    </TouchableOpacity>
+
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 

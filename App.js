@@ -12,6 +12,7 @@ import SettingsPage from "./screens/SettingsPage";
 import HomePage from "./screens/HomePage";
 import { UserProvider } from "./context/Context";
 import EntrainementDetails from "./screens/EntrainementDetails";
+import PrivacyPolicy from "./screens/PrivacyPolicy";
 
 
 
@@ -31,6 +32,7 @@ const App = () => {
 					<Stack.Screen name="EditProfilePage" component={EditProfilePage} />
 					<Stack.Screen name="SettingsPage" component={SettingsPage} />
 					<Stack.Screen name="HomePage" component={HomePage} />
+					<Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</UserProvider>

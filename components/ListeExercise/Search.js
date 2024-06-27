@@ -9,6 +9,7 @@ export default function Search({ search, setSearch }) {
             <TextInput
                 style={styles.text}
                 placeholder="Rechercher un exercice"
+                placeholderTextColor={'black'}
                 onChangeText={setSearch}
                 value={search}
             />
@@ -21,10 +22,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         margin: 10,
+        backgroundColor: '#E0E1EF',
+        borderRadius: 50,
+        padding: 5,
+        paddingHorizontal: 15,
     },
     text: {
         fontSize: 20,
         color: '#FFA500',
-        marginLeft: 5,
+        marginLeft: 15,
     },
 });

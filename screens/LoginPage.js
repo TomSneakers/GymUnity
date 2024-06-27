@@ -1,6 +1,6 @@
 // LoginPage.js
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView, SafeAreaView } from "react-native";
+import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView, SafeAreaView } from "react-native";
 import signIn, { authService } from "../service/authService";
 import Bouton from "../components/Bouton";
 import { useFonts } from "expo-font";
@@ -48,6 +48,9 @@ const LoginPage = ({ navigation }) => {
 		<SafeAreaView style={styles.safeArea}>
 			<ScrollView>
 				<View style={styles.container}>
+					<View style={styles.logoContainer}>
+						<Image source={require('../assets/Login/login.png')} style={styles.logo} />
+					</View>
 					<View style={styles.inputContainer}>
 						<Text style={styles.text}>Connexion</Text>
 
@@ -55,16 +58,16 @@ const LoginPage = ({ navigation }) => {
 						<TextInput
 							style={styles.input}
 							placeholder="xxxxx@xxxxx.com"
-							placeholderTextColor="#969AA8"
+							placeholderTextColor="#FFA500"
 							onChangeText={setEmail}
 							value={email}
 						/>
-
+						<Text style={styles.label}>Mot de passe</Text>
 						<View style={styles.inputRow}>
 							<TextInput
 								style={styles.input}
 								placeholder="********"
-								placeholderTextColor="#969AA8"
+								placeholderTextColor="#FFA500"
 								secureTextEntry={!isPasswordVisible}
 								onChangeText={setPassword}
 							/>
@@ -99,11 +102,20 @@ const LoginPage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	safeArea: {
+		backgroundColor: "#EDEDED",
 		flex: 1,
-		backgroundColor: "#FFF9F2",
+	},
+	logoContainer: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	logo: {
+		width: 300,
+		height: 300,
 	},
 	container: {
-		backgroundColor: "#FFF9F2",
+		backgroundColor: "#EDEDED",
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
@@ -147,7 +159,7 @@ const styles = StyleSheet.create({
 		width: "100%",
 		alignItems: "flex-start",
 		justifyContent: "flex-end",
-		marginTop: 300,
+		marginTop: 20,
 	},
 	buttonContainer: {
 		flex: 1,
@@ -166,7 +178,7 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 	},
 	forgotPassword: {
-		marginTop: 10,
+		marginTop: 30,
 	},
 	forgotPasswordText: {
 		color: "#004080",
@@ -174,7 +186,7 @@ const styles = StyleSheet.create({
 		fontFamily: "Inter-Black",
 	},
 	signupLink: {
-		marginTop: 20,
+		marginTop: 5,
 	},
 	signupLinkText: {
 		color: "#004080",

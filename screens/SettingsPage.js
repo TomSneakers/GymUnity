@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Switch, TouchableOpacity, ScrollView, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from "../components/Header";
 
 const SettingsPage = () => {
     const [isProfilePublic, setIsProfilePublic] = useState(true);
@@ -21,70 +22,71 @@ const SettingsPage = () => {
     };
 
     return (
-        <SafeAreaView style={styles.safeArea}>
-            <ScrollView contentContainerStyle={styles.container}>
-                <Text style={styles.headerText}>Settings</Text>
+        <ScrollView style={styles.safeArea}>
+            <Header title="Settings" color="#004080" />
 
-                <View style={styles.settingContainer}>
-                    <Text style={styles.settingLabel}>Public Profile</Text>
-                    <Switch
-                        value={isProfilePublic}
-                        onValueChange={(value) => setIsProfilePublic(value)}
-                    />
-                </View>
+            <Text style={styles.headerText}>Settings</Text>
 
-                <View style={styles.settingContainer}>
-                    <Text style={styles.settingLabel}>Username</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={username}
-                        onChangeText={setUsername}
-                        placeholder="Enter your username"
-                    />
-                </View>
+            <View style={styles.settingContainer}>
+                <Text style={styles.settingLabel}>Public Profile</Text>
+                <Switch
+                    value={isProfilePublic}
+                    onValueChange={(value) => setIsProfilePublic(value)}
+                />
+            </View>
 
-                <View style={styles.settingContainer}>
-                    <Text style={styles.settingLabel}>Email</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={email}
-                        onChangeText={setEmail}
-                        placeholder="Enter your email"
-                    />
-                </View>
+            <View style={styles.settingContainer}>
+                <Text style={styles.settingLabel}>Username</Text>
+                <TextInput
+                    style={styles.input}
+                    value={username}
+                    onChangeText={setUsername}
+                    placeholder="Enter your username"
+                />
+            </View>
 
-                <TouchableOpacity style={styles.button} onPress={handleSaveChanges}>
-                    <Text style={styles.buttonText}>Save Changes</Text>
-                </TouchableOpacity>
+            <View style={styles.settingContainer}>
+                <Text style={styles.settingLabel}>Email</Text>
+                <TextInput
+                    style={styles.input}
+                    value={email}
+                    onChangeText={setEmail}
+                    placeholder="Enter your email"
+                />
+            </View>
 
-                <Text style={styles.subHeaderText}>Filter & Sort</Text>
+            <TouchableOpacity style={styles.button} onPress={handleSaveChanges}>
+                <Text style={styles.buttonText}>Save Changes</Text>
+            </TouchableOpacity>
 
-                {/* Additional settings for filter and sort */}
-                {/* Example for filter */}
-                <View style={styles.settingContainer}>
-                    <Text style={styles.settingLabel}>Filter by Type</Text>
-                    {/* Replace with your filter UI */}
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Enter filter type"
-                    />
-                </View>
+            <Text style={styles.subHeaderText}>Filter & Sort</Text>
 
-                {/* Example for sort */}
-                <View style={styles.settingContainer}>
-                    <Text style={styles.settingLabel}>Sort by</Text>
-                    {/* Replace with your sort UI */}
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Enter sort criteria"
-                    />
-                </View>
+            {/* Additional settings for filter and sort */}
+            {/* Example for filter */}
+            <View style={styles.settingContainer}>
+                <Text style={styles.settingLabel}>Filter by Type</Text>
+                {/* Replace with your filter UI */}
+                <TextInput
+                    style={styles.input}
+                    placeholder="Enter filter type"
+                />
+            </View>
 
-                <TouchableOpacity style={styles.button} onPress={handleLogout}>
-                    <Text style={styles.buttonText}>Logout</Text>
-                </TouchableOpacity>
-            </ScrollView>
-        </SafeAreaView>
+            {/* Example for sort */}
+            <View style={styles.settingContainer}>
+                <Text style={styles.settingLabel}>Sort by</Text>
+                {/* Replace with your sort UI */}
+                <TextInput
+                    style={styles.input}
+                    placeholder="Enter sort criteria"
+                />
+            </View>
+
+            <TouchableOpacity style={styles.button} onPress={handleLogout}>
+                <Text style={styles.buttonText}>Logout</Text>
+            </TouchableOpacity>
+        </ScrollView>
+
     );
 };
 
@@ -92,6 +94,7 @@ const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
         backgroundColor: '#FFF9F2',
+        padding: 25,
     },
     container: {
         padding: 20,

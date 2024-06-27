@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 	},
 	itemContainer: {
 		flexDirection: 'row',
-		backgroundColor: "white",
+		backgroundColor: "#E0E1EF",
 		marginTop: 30,
 		height: 150,
 		borderRadius: 20,

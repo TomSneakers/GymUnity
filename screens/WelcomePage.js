@@ -11,8 +11,9 @@ const WelcomePage = () => {
 
     return (
         <View style={styles.container}>
-            <Image source={require('../assets/Login/logo.png')} style={styles.logo} />
-
+            <View style={styles.logoContainer}>
+                <Image source={require('../assets/Login/logo.png')} style={styles.logo} />
+            </View>
             <View style={styles.textContainer}>
                 <Text style={styles.heading}>C'est partie pour de nouveaux entrainements !</Text>
             </View>
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         padding: 20,
-        backgroundColor: '#FFF9F2',
+        backgroundColor: '#EDEDED',
     },
     textContainer: {
         marginBottom: 20,
@@ -54,10 +55,6 @@ const styles = StyleSheet.create({
     logo: {
         width: 600,
         height: 600,
-        position: 'absolute',
-        left: 0,
-        top: 50,
-        transform: [{ translateX: -100 }, { translateY: -50 }],
     },
 });
 

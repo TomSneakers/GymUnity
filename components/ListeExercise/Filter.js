@@ -12,7 +12,7 @@ export default function Filter({ isStarred, setIsStarred }) {
             <TouchableOpacity onPress={toggleStar} style={styles.star}>
                 <FontAwesome name={isStarred ? "star" : "star-o"} size={30} color="#FFA500" />
             </TouchableOpacity>
-            <Text style={styles.text}>Favoris</Text>
+
         </View>
     );
 }

@@ -16,12 +16,12 @@ const MainMenu2 = () => {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={handleLogoPress} style={styles.logoContainer}>
-                <Image source={require('../assets/logo.png')} style={styles.logo} />
+                <Image source={require('../assets/Login/logo.png')} style={styles.logo} />
                 <Text style={styles.logoText}>GymUnity</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleMessagesPress} style={styles.messagesContainer}>
                 <Image source={require('../assets/icon/decision-making_16330913.png')} style={styles.icon} />
-            </TouchableOpacity> 
+            </TouchableOpacity>
         </View>
     );
 };

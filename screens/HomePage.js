@@ -7,14 +7,14 @@ const posts = [
         user: 'John Doe',
         type: 'Cardio',
         result: '5 km in 30 minutes',
-        image: require('../assets/icon.png'),
+        image: require('../assets/Login/coche.png'),
     },
     {
         id: '2',
         user: 'Jane Smith',
         type: 'Muscle',
         result: '50 push-ups',
-        image: require('../assets/coche.png'),
+        image: require('../assets/Login/coche.png'),
     },
     // Ajoutez plus de posts ici
 ];
@@ -35,7 +35,7 @@ const PostItem = ({ post }) => (
 const HomePage = () => {
     return (
         <View style={styles.container}>
-            <FlatList 
+            <FlatList
                 data={posts}
                 renderItem={({ item }) => <PostItem post={item} />}
                 keyExtractor={item => item.id}

@@ -1,10 +1,11 @@
 // MainTabs.js
 import React from "react";
-import { Ionicons, FontAwesome6, Entypo } from "@expo/vector-icons";
+import { Ionicons, FontAwesome6, Entypo, FontAwesomeIcon } from "@expo/vector-icons";
 
 import ProfilePage from "../screens/ProfilePage";
 import Communication from "../screens/Communication";
 import Entrainement from "../screens/Entrainement";
+import HomePage from "../screens/HomePage";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CreateTraining from "./createTraining";
@@ -41,16 +42,10 @@ const MainTabs = () => {
 
 			}}
 		>
-			<Tab.Screen name="Profile" component={ProfilePage} options={{
+			<Tab.Screen name="Profile" component={HomePage} options={{
 				tabBarLabel: "",
 				tabBarIcon: ({ color }) => (
 					<Entypo name="home" color={color} size={40} />
-				),
-			}} />
-			<Tab.Screen name="Groupe" component={Communication} options={{
-				tabBarLabel: "",
-				tabBarIcon: ({ color }) => (
-					<Entypo name="chat" color={color} size={38} />
 				),
 			}} />
 			<Tab.Screen name="Entrainement" component={Entrainement} options={{
@@ -68,8 +63,21 @@ const MainTabs = () => {
 						<Ionicons name="add-circle" color={color} size={40} />
 					),
 				}}
-
 			/>
+			<Tab.Screen name="Groupe" component={Communication} options={{
+				tabBarLabel: "",
+				tabBarIcon: ({ color }) => (
+					<Entypo name="chat" color={color} size={38} />
+				),
+			}} />
+			<Tab.Screen name="eye" component={ProfilePage} options={{
+				tabBarLabel: "",
+				tabBarIcon: ({ color }) => (
+					<Entypo name="eye" color={color} size={38} />
+				),
+			}} /> 
+			
+			
 		</Tab.Navigator>
 	);
 };

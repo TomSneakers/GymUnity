@@ -1,97 +1,74 @@
 import React from 'react';
-import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
+import { View, Text, Image, FlatList, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import MainMenu2 from '../components/MainMenu2';
+import * as SecureStore from "expo-secure-store";
+import { useNavigation } from "@react-navigation/native";
+import { useUser } from "../context/Context"; // Import du hook useUser
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const posts = [
-    {
-        id: '1',
-        user: 'John Doe',
-        type: 'Cardio',
-        result: '5 km in 30 minutes',
-        image: require('../assets/icon.png'),
-    },
-    {
-        id: '2',
-        user: 'Jane Smith',
-        type: 'Muscle',
-        result: '50 push-ups',
-        image: require('../assets/coche.png'),
-    },
-    // Ajoutez plus de posts ici
-];
-
-const PostItem = ({ post }) => (
-    <View style={styles.postContainer}>
-        <View style={styles.postHeader}>
-            <Text style={styles.postUser}>{post.user}</Text>
-        </View>
-        <Image source={post.image} style={styles.postImage} />
-        <View style={styles.postContent}>
-            <Text style={styles.postType}>{post.type}</Text>
-            <Text style={styles.postResult}>{post.result}</Text>
-        </View>
-    </View>
-);
 
 const HomePage = () => {
+    const { user } = useUser(); // Utilisation du hook useUser pour accéder aux données de l'utilisateur
+    const navigation = useNavigation();
+
+    const handleLogout = async () => {
+        await SecureStore.deleteItemAsync("accessToken");
+        await SecureStore.deleteItemAsync("refreshToken");
+        await SecureStore.deleteItemAsync("userData"); // Supprimer les données utilisateur de SecureStore lors de la déconnexion
+        navigation.navigate("WelcomePage");
+    };
+
+    if (!user) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.description}>Chargement...</Text>
+            </View>
+        );
+    }
+
+    const handleBackPress = () => {
+        navigation.navigate("HomePage");
+    };
+
     return (
-        <View style={styles.container}>
-            <FlatList 
-                data={posts}
-                renderItem={({ item }) => <PostItem post={item} />}
-                keyExtractor={item => item.id}
-                contentContainerStyle={styles.feedContainer}
-            />
-        </View>
+        <SafeAreaView style={styles.safeArea}>
+            <MainMenu2 />
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
+                
+            </ScrollView>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    safeArea: {
         flex: 1,
-        backgroundColor: '#f9f9f9',
+        backgroundColor: '#f0f0f0',
     },
-    feedContainer: {
-        padding: 20,
+    scrollContainer: {
+        flexGrow: 1,
+        paddingVertical: 20,
     },
-    postContainer: {
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        padding: 15,
-        marginBottom: 20,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
-        elevation: 2,
+    menuContainer: {
+        backgroundColor: '#f0f0f0',
+        paddingHorizontal: 20,
     },
-    postHeader: {
+    menuItem: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 10,
+        paddingVertical: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: '#e0e0e0',
     },
-    postUser: {
+    menuItemIcon: {
+        marginRight: 20,
+    },
+    menuItemText: {
         fontSize: 16,
-        fontWeight: 'bold',
     },
-    postImage: {
-        width: '100%',
-        height: 200,
-        borderRadius: 10,
-        marginBottom: 10,
-    },
-    postContent: {
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-    },
-    postType: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: '#4CAF50',
-    },
-    postResult: {
-        fontSize: 14,
-        color: '#333',
+    icon: {
+        width: 24,
+        height: 24,
     },
 });
 

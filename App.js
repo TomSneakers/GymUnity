@@ -7,8 +7,12 @@ import MainTabs from "./components/MainTabs";
 import ListeEntrainement from "./screens/ListeEntrainement";
 import WelcomePage from "./screens/WelcomePage";
 import Landing from "./screens/Landing";
+import EditProfilePage from "./screens/EditProfilePage";
+import SettingsPage from "./screens/SettingsPage";
+import HomePage from "./screens/HomePage";
 import { UserProvider } from "./context/Context";
 import EntrainementDetails from "./screens/EntrainementDetails";
+
 
 
 const Stack = createStackNavigator();
@@ -24,6 +28,9 @@ const App = () => {
 					<Stack.Screen name="WelcomePage" component={WelcomePage} />
 					<Stack.Screen name="Landing" component={Landing} />
 					<Stack.Screen name="EntrainementDetails" component={EntrainementDetails} />
+					<Stack.Screen name="EditProfilePage" component={EditProfilePage} />
+					<Stack.Screen name="SettingsPage" component={SettingsPage} />
+					<Stack.Screen name="HomePage" component={HomePage} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</UserProvider>
@@ -31,3 +38,4 @@ const App = () => {
 };
 
 export default App;
+

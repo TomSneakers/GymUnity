@@ -32,7 +32,7 @@ const LoginPage = ({ navigation }) => {
 		}
 
 		if (!password) {
-			Alert.alert("Erreur", "Veuillez entrer votre mot de passe.");
+			Alert.alert("Erreur", "Veuillez entrer votre mot de passe");
 			return;
 		}
 		const res = await authService.signIn(email, password);

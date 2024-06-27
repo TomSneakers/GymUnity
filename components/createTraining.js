@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     },
     safeArea: {
         flex: 1,
-        backgroundColor: '#FFF9F2',
+        backgroundColor: '#F0F0F0',
     },
     keyboardAvoidingView: {
         flex: 1,
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
         padding: 20,
-        backgroundColor: '#FFF9F2',
+        backgroundColor: '#F0F0F0',
         paddingBottom: 80, // Ajout de padding pour l'espace en bas
     },
     title: {

@@ -5,6 +5,7 @@ import { trainingService } from "../service/trainingService";
 import Filter from "../components/ListeExercise/Filter";
 import Search from "../components/ListeExercise/Search";
 
+
 export default function ListeEntrainement() {
 	const navigation = useNavigation();
 	const [trainings, setTrainings] = useState([]);
@@ -38,12 +39,6 @@ export default function ListeEntrainement() {
 		}, 2000);
 	};
 
-	const toggleStar = (index) => {
-		const updatedStarredItems = [...starredItems];
-		updatedStarredItems[index] = !updatedStarredItems[index];
-		setStarredItems(updatedStarredItems);
-	};
-
 	const filteredTrainings = useMemo(() => {
 		if (!isStarred && !search) return trainings;
 
@@ -75,8 +70,10 @@ export default function ListeEntrainement() {
 				<View style={styles.container}>
 					<Text style={styles.title}>Entrainements</Text>
 					<View style={styles.underline} />
-					<Filter isStarred={isStarred} setIsStarred={setIsStarred} />
-					<Search search={search} setSearch={setSearch} />
+					<View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 }}>
+						<Filter isStarred={isStarred} setIsStarred={setIsStarred} />
+						<Search search={search} setSearch={setSearch} />
+					</View>
 
 					{filteredTrainings.map((item) => (
 						<TouchableOpacity
@@ -109,7 +106,7 @@ export default function ListeEntrainement() {
 const styles = StyleSheet.create({
 	safeArea: {
 		flex: 1,
-		backgroundColor: "#FFF9F2",
+		backgroundColor: "#F0F0F0",
 	},
 	scrollViewContent: {
 		flexGrow: 1,
@@ -135,10 +132,18 @@ const styles = StyleSheet.create({
 	},
 	itemContainer: {
 		flexDirection: 'row',
-		backgroundColor: "#E0E1EF",
+		backgroundColor: "white",
 		marginTop: 30,
-		height: 120,
+		height: 150,
 		borderRadius: 20,
+		//box shadow
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
 	},
 	textuel: {
 		flex: 1,
@@ -158,7 +163,7 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		color: "004080",
 		marginHorizontal: 15,
-		marginTop: 20,
+		marginTop: 30,
 		fontFamily: 'Poppins_600SemiBold',
 		textTransform: 'uppercase',
 
@@ -174,10 +179,9 @@ const styles = StyleSheet.create({
 	},
 	image: {
 		width: "100%",
-		height: 120,
+		height: 150,
 		alignSelf: 'flex-end',
 		marginTop: 10,
-		borderTopLeftRadius: 20,
-		borderBottomLeftRadius: 20,
+		borderRadius: 20,
 	},
 });

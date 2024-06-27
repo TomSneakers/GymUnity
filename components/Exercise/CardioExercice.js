@@ -3,10 +3,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Minuteur from './Minuteur';
-
 export default function CardioExercice({ name, duration }) {
     return (
         <View style={styles.container}>
+
             <Text style={styles.name}>{name}</Text>
             <View style={styles.itemContainer}>
                 <Text style={styles.duration}>Durée de l'exercice :</Text>
@@ -15,6 +15,7 @@ export default function CardioExercice({ name, duration }) {
             <View style={styles.itemContainer}>
                 <Minuteur initialTime={duration} />
             </View>
+
         </View>
     );
 }
@@ -26,7 +27,16 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         paddingVertical: 20,
         borderRadius: 10,
-        backgroundColor: '#f0f0f0',
+        backgroundColor: '#FFF9F2',
+        //box shadow
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     name: {
         fontSize: 20,
